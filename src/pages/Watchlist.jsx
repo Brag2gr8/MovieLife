@@ -1,27 +1,38 @@
 import { useEffect, useRef, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 export default function WatchList() {
-  const [currentWatchlist, setCurrentWatchlist] = useState([])
-  const location = useLocation()
-  const name = location.state?.name
+  const [allWatchlist, setAllWatchlist] = useState([])
+  const [currentWatchlist, setCurrentWatchlist] = useState({
+    name: "myWatchList",
+    description: "WatchList description",
+  })
+  const { name } = useParams()
   const topRef = useRef()
+  console.log(allWatchlist)
+
+  console.log(name)
 
     useEffect(() => {
         const existingWatchList = localStorage.getItem("allWatchlist")
         const data = JSON.parse(existingWatchList)
 
         if(data) {
-            setCurrentWatchlist(data)
+            setAllWatchlist(data)
         }
 
         if (topRef.current) {
             topRef.current.scrollIntoView({ behavior: "smooth" })
         }
-        
-    }, [name])
 
-    console.log(location.state)
+
+    }, [allWatchlist, name])
+
+    allWatchlist.map(item => {
+        if (item.name === name) {
+            setCurrentWatchlist(item)
+        } 
+    })
 
     return (
         <div ref={topRef} className="watchlist-page">
@@ -31,7 +42,7 @@ export default function WatchList() {
             </div>
             <div className="watchlist-main-details">
                 <h3>About this watchlist</h3>
-                <p>???</p>
+                <p>{currentWatchlist.description}</p>
             </div>
             <div className="watchlist-sub-details">
                 <div>

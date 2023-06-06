@@ -22,7 +22,15 @@ export default function History() {
     })
 
     function clearHistory() {
-        localStorage.removeItem("history")
+        if (history.length === 0) {
+            return alert("you have no movie in your history")
+        }
+        const confirmed = window.confirm('Are you sure you want to clear history?');
+      
+        if (confirmed) {
+            localStorage.removeItem("history")
+            setHistory([])
+        }
     }
 
     return (
