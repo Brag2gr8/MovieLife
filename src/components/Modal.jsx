@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 // import useHover from "../hooks/useHover"
 
 export default function Modal(props) {
-    const [currentWatchlist, setCurrentWatchlist] = useState([])
+    const [allWatchlist, setAllWatchlist] = useState([])
     // const [ref, hovered] = useHover()
     const {isOpen, setIsOpen, refresh, setRefresh } = props
     const style = isOpen ? "show" : "none"
@@ -23,7 +23,7 @@ export default function Modal(props) {
         const data = JSON.parse(existingWatchList)
 
         if(data) {
-            setCurrentWatchlist(data)
+            setAllWatchlist(data)
         }
         
     }, [props, refresh])
@@ -34,13 +34,13 @@ export default function Modal(props) {
         const confirmed = window.confirm('Are you sure you want to delete this watchlist?');
       
         if (confirmed) {
-          const updatedWatchlist = currentWatchlist.filter((watchlist) => watchlist.id !== id);
-          setCurrentWatchlist(updatedWatchlist);
+          const updatedWatchlist = allWatchlist.filter((watchlist) => watchlist.id !== id);
+          setAllWatchlist(updatedWatchlist);
           localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
         }
       }
 
-    const watchlistEl = currentWatchlist.map( watchlist => {
+    const watchlistEl = allWatchlist.map( watchlist => {
         return (
             <div 
                 key={watchlist.id}
