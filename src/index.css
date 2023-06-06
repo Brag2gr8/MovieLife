@@ -206,15 +206,34 @@ transform: rotate(90deg);
 
 .watchlist-dropdown {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 999;
+}
+
+.movie-card-cancel-modal {
+  padding: 10px 13px;
+  border: 1px solid var(--line-color);
+  border-radius: 50%;
+  cursor: pointer;
+  animation: blink 1s ease-in-out alternate infinite;
+}
+
+@keyframes blink {
+  from {border: 1px solid var(--line-color);}
+  to {background: var(--red);
+  color: var(--backgroun-color);}
+}
+
+.movie-card-cancel-modal:hover {
+  background: var(--red);
+  color: var(--backgroun-color);
 }
 
 .movie-card-modal {
@@ -543,8 +562,6 @@ transform: rotate(90deg);
   cursor: pointer;
 }
 
-.watchlist-items-div a {width: 100%;}
-
 .watchlist-items-div a:hover {
   transform: scale(1.2);
 }
@@ -600,7 +617,8 @@ transform: rotate(90deg);
 }
 
 .watchlist-page {
-  padding: 35px 30px 100vh;
+  height: 100%;
+  padding: 35px 30px 50vh;
 }
 
 .watchlist-title {
@@ -638,7 +656,16 @@ transform: rotate(90deg);
   font-weight: 700;
 }
 
+.watchlist-movies {
+  margin-top: 100px;
+  padding: 0;
+}
+.watchlist-movies h2 {
+  margin-bottom: 30px;
+}
+
 /*** HISTORY ***/
+
 .history {height: 100vh;}
 
 .history-header {
