@@ -12,7 +12,7 @@ export default function MovieCard(props) {
   const [watchlistItems, setWatchlistItems] = useState([]);
 
   useEffect(() => {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || [];
     setWatchlistItems(watchlist);
   }, []);
 
@@ -47,7 +47,7 @@ export default function MovieCard(props) {
               rating: props.rating,
             });
   
-            localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+            localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
             alert(`Added movie to ${selectedWatchlist}`);
             setDropdownVisible(false);
           } else {
