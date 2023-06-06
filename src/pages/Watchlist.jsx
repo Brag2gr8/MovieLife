@@ -1,66 +1,112 @@
 import { useEffect, useRef, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link, useLoaderData } from "react-router-dom"
+import MovieCard from "../components/MovieCard"
 
 export default function WatchList() {
-  const [allWatchlist, setAllWatchlist] = useState([])
-  const [currentWatchlist, setCurrentWatchlist] = useState({
-    name: "myWatchList",
-    description: "WatchList description",
-  })
-  const { name } = useParams()
-  const topRef = useRef()
-  console.log(allWatchlist)
+    const [watchlist, setWatchlist] = useState({
+        name: "myWatchList",
+        description: "WatchList description",
+        movies: [{
+            id: 569094,
+            image:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
+            name:'Spider-Man: Across the Spider-Verse',
+            rating: 87,
+            year:'2023'
+        }]
+    })
 
-  console.log(name)
+    const { name: watchlistName } = useParams()
+    const topRef = useRef()
+    console.log(watchlist)
+
+    console.log(watchlistName)
 
     useEffect(() => {
         const existingWatchList = localStorage.getItem("allWatchlist")
-        const data = JSON.parse(existingWatchList)
-
-        if(data) {
-            setAllWatchlist(data)
+        const parsedWatchlist = JSON.parse(existingWatchList)
+      
+        if (parsedWatchlist) {
+          parsedWatchlist.forEach(data => {
+            if (data.name === watchlistName) {
+              setWatchlist(data)
+            }
+          })
         }
-
+      
         if (topRef.current) {
-            topRef.current.scrollIntoView({ behavior: "smooth" })
+          topRef.current.scrollIntoView({ behavior: "smooth" })
         }
+      }, [watchlistName])
 
+    function getAverageScore(arr) {
+        let totalRating = 0
+        arr.map(el => {
+            totalRating += el.rating
+        })
 
-    }, [allWatchlist, name])
+        return Math.floor(totalRating / arr.length)
+    }
 
-    allWatchlist.map(item => {
-        if (item.name === name) {
-            setCurrentWatchlist(item)
-        } 
+    const watchlistEl = watchlist.movies.map(movie => {
+        return (
+            <MovieCard
+                key={movie.id}
+                id={movie.id}
+                name={movie.name}
+                rating={movie.rating}
+                image={movie.image}
+                year={movie.year}
+                isWatchlist={true}
+            />
+        )
     })
 
     return (
         <div ref={topRef} className="watchlist-page">
-            <div className="watchlist-title">
-                <h1>{name}</h1>
+          {watchlist.movies.length === 0 && (
+            <div className="movie-tray">
+              <div className="no-movie"> 
+                <h1>No Movie Found</h1>
+                <Link to="/">
+                  <button className="return-home">
+                    Return to Homepage
+                  </button>
+                </Link>
+              </div>
+            </div>
+          )}
+          {watchlist.movies.length > 0 && (
+            <>
+              <div className="watchlist-title">
+                <h1>{watchlist.name}</h1>
                 <i className="fa-solid fa-pen-to-square"></i>
-            </div>
-            <div className="watchlist-main-details">
+              </div>
+              <div className="watchlist-main-details">
                 <h3>About this watchlist</h3>
-                <p>{currentWatchlist.description}</p>
-            </div>
-            <div className="watchlist-sub-details">
+                <p>{watchlist.description}</p>
+              </div>
+              <div className="watchlist-sub-details">
                 <div>
-                    <h4>ITEMS ON LIST</h4>
-                    <span>???</span>
+                  <h4>ITEMS ON LIST</h4>
+                  <span>{watchlist.movies.length}</span>
                 </div>
                 <div>
-                    <h4>UNWATCHED RUNTIME</h4>
-                    <span>???</span>
+                  <h4>TOTAL RUNTIME</h4>
+                  <span>???</span>
                 </div>
                 <div>
-                    <h4>AVERAGE SCORE</h4>
-                    <span>???</span>
+                  <h4>AVERAGE RATING</h4>
+                  <span>{getAverageScore(watchlist.movies)}</span>
                 </div>
-            </div>
-            <div className="watclist-movies">
-
-            </div>
+              </div>
+              <div className="search-page watchlist-movies">
+                <h2>Movies in watchlist</h2>
+                <div className="movie-tray">
+                  {watchlistEl}
+                </div>
+              </div>
+            </>
+          )}
         </div>
-    )
+      )
 }

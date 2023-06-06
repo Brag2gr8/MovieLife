@@ -18,7 +18,7 @@ export default function MovieCard(props) {
 
   console.log(watchlistItems)
 
-  const {id, name,image, year, rating } = props;
+  const {id, name,image, year, rating, isWatchlist } = props;
 
   function openWatchlistSelect() {
     if (watchlistItems.length === 0) {
@@ -46,18 +46,18 @@ export default function MovieCard(props) {
               year: props.year,
               rating: props.rating,
             });
-  
-            localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
+
             alert(`Added movie to ${selectedWatchlist}`);
-            setDropdownVisible(false);
           } else {
             alert('Movie already exists in this watchlist.');
-            setDropdownVisible(false);
           }
         }
         return watchlist;
       });
-    }
+
+      localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
+      setDropdownVisible(false);
+    } else {alert("please select a watchlist from the options")}
   }
   
 
@@ -72,12 +72,13 @@ export default function MovieCard(props) {
 
   return (
     <div className="movie-card">
-      <img
-        className="movie-ribbon"
-        src={ribbon}
-        onClick={openWatchlistSelect}
-        alt="Ribbon"
-      />
+      {!isWatchlist && <img
+          className="movie-ribbon"
+          src={ribbon}
+          onClick={openWatchlistSelect}
+          alt="Ribbon"
+        />
+      }
       <Link to={`/movies/all/${id}`}>
         <img src={image} className="movie-card-image" alt="Movie" />
       </Link>
@@ -92,6 +93,12 @@ export default function MovieCard(props) {
       <p>({year})</p>
       {isDropdownVisible && (
         <div className="watchlist-dropdown">
+          <span 
+        className='movie-card-cancel-modal'
+        onClick={() => setDropdownVisible(false)}
+        >
+          X
+        </span>
         <div className="movie-card-modal">
           <div className="movie-card-modal-content">
             <h3>Select a watchlist</h3>

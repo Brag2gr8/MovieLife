@@ -5,11 +5,9 @@ import profile from "../assets/profile-dummy.png"
 import { NavLink, useNavigate } from "react-router-dom"
 import mLogo from "../assets/mLogo.png"
 import { useEffect, useState } from "react"
-// import useHover from "../hooks/useHover"
 
 export default function Modal(props) {
     const [allWatchlist, setAllWatchlist] = useState([])
-    // const [ref, hovered] = useHover()
     const {isOpen, setIsOpen, refresh, setRefresh } = props
     const style = isOpen ? "show" : "none"
     const navigate = useNavigate()
