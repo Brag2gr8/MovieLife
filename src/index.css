@@ -660,9 +660,12 @@ transform: rotate(90deg);
   margin-top: 100px;
   padding: 0;
 }
+
 .watchlist-movies h2 {
   margin-bottom: 30px;
 }
+
+.no-movie-watchlist button {margin-top: 30px;}
 
 /*** HISTORY ***/
 

@@ -1,25 +1,22 @@
 import { useEffect, useRef, useState } from "react"
-import { useParams, Link, useLoaderData } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import MovieCard from "../components/MovieCard"
 
 export default function WatchList() {
     const [watchlist, setWatchlist] = useState({
-        name: "myWatchList",
-        description: "WatchList description",
+        name: "No watchlist",
+        description: "if you are seeing this, you please select a valid watchlist",
         movies: [{
             id: 569094,
-            image:'https://image.tmdb.org/t/p/original/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-            name:'Spider-Man: Across the Spider-Verse',
-            rating: 87,
-            year:'2023'
+            image:"https://via.placeholder.com/300x450.png?text=No+Profile+Available",
+            name:'placeholder movie',
+            rating: 0,
+            year:'0000'
         }]
     })
 
     const { name: watchlistName } = useParams()
     const topRef = useRef()
-    console.log(watchlist)
-
-    console.log(watchlistName)
 
     useEffect(() => {
         const existingWatchList = localStorage.getItem("allWatchlist")
@@ -65,7 +62,7 @@ export default function WatchList() {
         <div ref={topRef} className="watchlist-page">
           {watchlist.movies.length === 0 && (
             <div className="movie-tray">
-              <div className="no-movie"> 
+              <div className="no-movie-watchlist"> 
                 <h1>No Movie Found</h1>
                 <Link to="/">
                   <button className="return-home">
@@ -79,7 +76,9 @@ export default function WatchList() {
             <>
               <div className="watchlist-title">
                 <h1>{watchlist.name}</h1>
-                <i className="fa-solid fa-pen-to-square"></i>
+                <Link to={`/edit-watchlist?name=${watchlistName}`}>
+                  <i className="fa-solid fa-pen-to-square"></i>
+                </Link>
               </div>
               <div className="watchlist-main-details">
                 <h3>About this watchlist</h3>
