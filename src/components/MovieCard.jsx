@@ -30,31 +30,35 @@ export default function MovieCard(props) {
     if (selectedWatchlist) {
       const updatedWatchlist = watchlistItems.map((watchlist) => {
         if (watchlist.name === selectedWatchlist) {
-  
           const movieExists = watchlist.movies.some((movie) => movie.id === id);
   
           if (!movieExists) {
-            watchlist.movies.push({
-              id: props.id,
-              image: props.image,
-              name: props.name,
-              year: props.year,
-              rating: props.rating,
-            });
-
-            alert(`Added movie to ${selectedWatchlist}`);
+            return {
+              ...watchlist,
+              movies: [
+                ...watchlist.movies,
+                {
+                  id: props.id,
+                  image: props.image,
+                  name: props.name,
+                  year: props.year,
+                  rating: props.rating,
+                },
+              ],
+            };
           } else {
             alert('Movie already exists in this watchlist.');
           }
         }
         return watchlist;
       });
-
+  
       localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
       setDropdownVisible(false);
-    } else {alert("please select a watchlist from the options")}
+    } else {
+      alert('Please select a watchlist from the options');
+    }
   }
-  
 
   const emoji =
     rating <= 50 ? (
