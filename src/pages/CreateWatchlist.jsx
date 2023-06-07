@@ -9,7 +9,8 @@ export default function CreateWatchList() {
     const [formData, setFormData] = useState({
         id: nanoid(),
         name: "",
-        description: ""
+        description: "",
+        movies: []
     })
     const navigate = useNavigate()
     

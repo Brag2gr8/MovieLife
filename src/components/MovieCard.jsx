@@ -8,15 +8,13 @@ import ribbon from '../assets/ribbon.svg';
 
 export default function MovieCard(props) {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedWatchlist, setSelectedWatchlist] = useState(null);
+  const [selectedWatchlist, setSelectedWatchlist] = useState('');
   const [watchlistItems, setWatchlistItems] = useState([]);
 
   useEffect(() => {
     const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || [];
     setWatchlistItems(watchlist);
   }, []);
-
-  console.log(watchlistItems)
 
   const {id, name,image, year, rating, isWatchlist } = props;
 
@@ -32,11 +30,8 @@ export default function MovieCard(props) {
     if (selectedWatchlist) {
       const updatedWatchlist = watchlistItems.map((watchlist) => {
         if (watchlist.name === selectedWatchlist) {
-          if (!watchlist.movies) {
-            watchlist.movies = [];
-          }
   
-          const movieExists = watchlist.movies.some((movie) => movie.id === props.id);
+          const movieExists = watchlist.movies.some((movie) => movie.id === id);
   
           if (!movieExists) {
             watchlist.movies.push({
