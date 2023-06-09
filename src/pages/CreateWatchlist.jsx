@@ -4,7 +4,7 @@ import { nanoid } from "nanoid"
 
 
 export default function CreateWatchList() {
-    const [currentWatchlist, setCurrentWatchlist] = useState([])
+    const [allWatchlist, setAllWatchlist] = useState([])
     const { setRefresh } = useOutletContext()
     const [formData, setFormData] = useState({
         id: nanoid(),
@@ -19,11 +19,11 @@ export default function CreateWatchList() {
         const data = JSON.parse(existingWatchList)
 
         if(data) {
-            setCurrentWatchlist(data)
+            setAllWatchlist(data)
         }
 
         
-    }, [currentWatchlist.length])
+    }, [])
 
     function handleChange(e) {
         const {name, value} = e.target
@@ -37,13 +37,20 @@ export default function CreateWatchList() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault()
-        alert(`${formData.name} WatchList successfully created`)
-        setRefresh(prev => !prev)
-        const updatedWatchlist= [...currentWatchlist, formData];
-        setCurrentWatchlist(updatedWatchlist)
-        localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist))
-        navigate("/")
+        const isInWatchlist = allWatchlist.some(el => formData.name === el.name)
+        
+        if (!isInWatchlist) {
+            console.log(isInWatchlist)
+            e.preventDefault()
+            alert(`${formData.name} WatchList successfully created`)
+            setRefresh(prev => !prev)
+            const updatedWatchlist= [...allWatchlist, formData];
+            setAllWatchlist(updatedWatchlist)
+            localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist))
+            navigate("/")
+        } else {
+            alert("watchlist name already exists, choose another name")
+        }
     }
 
     return (

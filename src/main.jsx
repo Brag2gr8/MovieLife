@@ -6,7 +6,7 @@ import {createBrowserRouter,
 } from "react-router-dom"
 import HomeLayout from "./components/HomeLayout"
 import Home, {loader as homeLoader} from "./pages/Home"
-import Movies from "./pages/movies/Movies"
+import Movies, {loader as MoviesLoader} from "./pages/movies/Movies"
 import MovieDetails, {
   loader as MovieDetailLoader
 } from "./pages/movies/MovieDetails"
@@ -25,7 +25,7 @@ import InvalidPage from "./pages/InvalidPage"
 const movieLife = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<HomeLayout />} >
       <Route index element={<Home />} loader={homeLoader} />
-      <Route path="movies" element={<Movies />} />
+      <Route path="movies" element={<Movies />} loader={MoviesLoader} />
       <Route path="movies/trending" element={<Trending />} />
       <Route path="movies/popular" element={<Popular />} />
       <Route path="movies/now-playing" element={<NowPlaying />} />

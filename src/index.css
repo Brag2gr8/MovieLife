@@ -19,6 +19,10 @@ html , body {
 h2, h4 {font-weight: 400}
 button {cursor: pointer}
 
+hr {
+ border: 3px solid var(--red)
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -71,9 +75,6 @@ transform: rotate(90deg);
   padding: 24px 17px;
 }
 
-.home > hr {
-  border: 3px solid var(--red)
-}
 
 .home-section {
   background: var(--line-color);
@@ -337,7 +338,6 @@ transform: rotate(90deg);
 /*** MOVIES PAGE ***/
 
 .movies {
-  height: 100vh;
   padding: 30px
 }
 
@@ -345,6 +345,7 @@ transform: rotate(90deg);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 20px;
+  margin: 30px;
 }
 
 .movies-list-container > a {
@@ -356,7 +357,7 @@ transform: rotate(90deg);
   border-radius: 6px;
 }
 
-.movies-list-container > span:hover {
+.movies-list-container > a:hover {
   background: var(--red);
   color: var(--backgroun-color);
   transform: scale(1.2);

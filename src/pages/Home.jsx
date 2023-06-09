@@ -52,6 +52,7 @@ export default function Home() {
                 year={movie.year}
             />
         })
+        
         return (
             <>
                 <div className="movie-type" >
