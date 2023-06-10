@@ -10,6 +10,7 @@ import {
 import MovieCard from "../../components/MovieCard"
 
 export async function loader() {
+    
     const {returnedMovies: popularMovies} = await getPopularMovies()
     const {returnedMovies: trendingMovies} = await getTrendingMovies()
     const {returnedMovies: nowPlayingMovies} = await getNowPlayingMovies()
@@ -23,6 +24,8 @@ export async function loader() {
         nowPlayingMovies, 
         upcomingMovies
     }
+
+    console.log(popularMovies)
 }
 
 
@@ -35,6 +38,8 @@ export default function Movies() {
         nowPlayingMovies, 
         upcomingMovies
     } = useLoaderData()
+
+    console.log(popularMovies)
     
     function renderMovie(movieType, movieHeader) {
         const movieTray = movieType.slice(0, 10).map(movie => {
