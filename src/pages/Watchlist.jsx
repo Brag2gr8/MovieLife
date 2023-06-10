@@ -97,7 +97,7 @@ export default function WatchList() {
           </div>
         </div>
         <div className="search-page watchlist-movies">
-          <h2>Movies in Watchlist</h2>
+          <h2>Movies in this Watchlist</h2>
           <div className="movie-tray">{watchlistEl}</div>
         </div>
       </>
