@@ -56,8 +56,24 @@ header {
   padding: 20px 17px;
 }
 
+.header-title {
+  display: flex;
+  gap: 10px
+}
+
+.beta {
+  background-color: var(--writing-color);
+  padding: 2px;
+  border-radius: 6px;
+  align-self: start;
+  font-size: 16px;
+  font-weight: 700;
+  animation: blink 2s ease-in infinite alternate;
+}
+
 header h2 {
-  font-weight: 700
+  font-weight: 700;
+  font-size: 30px;
 }
 
 header i {
@@ -156,6 +172,7 @@ transform: rotate(90deg);
 
 .movie-card {
   display: flex;
+  /* max-width: 200px; */
   flex-direction: column;
   gap: 5px;
   position: relative;
@@ -227,9 +244,15 @@ transform: rotate(90deg);
 }
 
 @keyframes blink {
-  from {border: 1px solid var(--line-color);}
-  to {background: var(--red);
-  color: var(--backgroun-color);}
+  from {
+    background: var(--background-color);
+    color: var(--writing-color)
+  }
+
+  to {
+    background: var(--red);
+    color: var(--backgroun-color);
+}
 }
 
 .movie-card-cancel-modal:hover {
@@ -353,7 +376,7 @@ transform: rotate(90deg);
   color: var(--writing-color);
   font-size: 20px;
   text-align: center;
-  padding: 20px 0;
+  padding: 10px 0;
   border-radius: 6px;
 }
 
@@ -371,7 +394,7 @@ transform: rotate(90deg);
   flex-direction: column;
 }
 
-.search-page h1 {
+.search-page > h1 {
   margin: 10px 0 40px;
 }
 
@@ -530,12 +553,6 @@ transform: rotate(90deg);
   width: 100%
 }
 
-/*** HISTORY ***/
-
-.history-page {
-  height: 100vh;
-}
-
 /*** WATCHLIST ***/
 
 .watchlist-items {
@@ -672,25 +689,28 @@ transform: rotate(90deg);
 
 /*** HISTORY ***/
 
-.history {height: 100vh;}
+/*** HISTORY ***/
+
+.history-page {
+  display: flex;
+  flex-direction: column;
+}
 
 .history-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 30px 0 50px;
 }
 
 .history-header p {
   color: var(--red);
-  margin-bottom: 20px;
 }
 
 .history-header p:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-
-.history .movie-card {max-width: 200px;}
 
 /***  MEDIA QUERIES***/
 

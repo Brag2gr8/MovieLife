@@ -18,6 +18,7 @@ export default function WatchList() {
     const foundWatchlist = parsedWatchlist.find(
       (data) => data.name === watchlistName
     );
+
     if (foundWatchlist) {
       setWatchlist(foundWatchlist);
     }
@@ -27,8 +28,9 @@ export default function WatchList() {
     }
   }, [watchlistName]);
 
-  function getAverageScore(arr) {
+  function getAverageRating(arr) {
     let totalRating = 0;
+
     arr.forEach((el) => {
       totalRating += el.rating;
     });
@@ -73,7 +75,7 @@ export default function WatchList() {
         </div>
         <div className="watchlist-sub-details">
           <div>
-            <h4>ITEMS ON LIST</h4>
+            <h4>MOVIES ON LIST</h4>
             <span>{watchlist.movies.length}</span>
           </div>
           <div>
@@ -82,7 +84,7 @@ export default function WatchList() {
           </div>
           <div>
             <h4>AVERAGE RATING</h4>
-            <span>{getAverageScore(watchlist.movies) || 0}</span>
+            <span>{getAverageRating(watchlist.movies) || "N/A"}</span>
           </div>
         </div>
         <div className="search-page watchlist-movies">

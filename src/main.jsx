@@ -18,6 +18,7 @@ import Upcoming from "./pages/movies/Upcoming"
 import Search from "./pages/Search"
 import History from "./pages/History"
 import CreateWatchlist from "./pages/CreateWatchlist"
+import EditWatchlist from "./pages/EditWatchList"
 import Watchlist from "./pages/Watchlist"
 import InvalidPage from "./pages/InvalidPage"
 
@@ -39,6 +40,7 @@ const movieLife = createBrowserRouter(createRoutesFromElements(
       <Route path="search" element={<Search />} />
       <Route path="history" element={<History />} />
       <Route path="create-watchList" element={<CreateWatchlist />} />
+      <Route path="edit-watchList" element={<EditWatchlist />} />
       <Route path="watchlist/:name" element={<Watchlist />} />
       <Route path="*" element={<InvalidPage />} />
     </Route>
