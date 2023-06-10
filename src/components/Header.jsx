@@ -10,12 +10,15 @@ const {isOpen, setIsOpen} = props
 
     return (
         <header>
-            <Link 
-                to="/"
-                onClick={() => setIsOpen(false)}
-            >
-                <h2>MovieLife</h2>
-            </Link>
+            <div className="header-title">
+                <Link 
+                    to="/"
+                    onClick={() => setIsOpen(false)}
+                >
+                    <h2>MovieLife</h2>
+                </Link>
+                <span className="beta">beta</span>
+            </div>
             <div className="icon">
                 {icon}
             </div>
