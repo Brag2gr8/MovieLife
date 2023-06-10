@@ -345,7 +345,7 @@ transform: rotate(90deg);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 20px;
-  margin: 30px;
+  margin: 20px;
 }
 
 .movies-list-container > a {
