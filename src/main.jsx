@@ -25,7 +25,7 @@ import InvalidPage from "./pages/InvalidPage"
 const movieLife = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<HomeLayout />} >
       <Route index element={<Home />} loader={homeLoader} />
-      <Route path="movies" element={<Movies />} loader={MoviesLoader} />
+      <Route path="movies" element={<Movies />} loader={MoviesLoader}/>
       <Route path="movies/trending" element={<Trending />} />
       <Route path="movies/popular" element={<Popular />} />
       <Route path="movies/now-playing" element={<NowPlaying />} />
