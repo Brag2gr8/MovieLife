@@ -312,6 +312,7 @@ transform: rotate(90deg);
 
 .modal a {
   display: flex;
+  align-items: center;
   gap: 15px;
   padding: 10px 12px;
 }
@@ -574,8 +575,6 @@ transform: rotate(90deg);
   display: flex;
   padding: 10px 12px 0;
   gap: 15px;
-  justify-content: stretch;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
