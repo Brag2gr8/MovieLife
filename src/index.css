@@ -575,16 +575,20 @@ transform: rotate(90deg);
   width: 100%;
 }
 
-.watchlist-items-div i {
+.watchlist-items-div > i {
   color: var(--red);
   cursor: pointer;
 }
 
-.watchlist-items-div a:hover {
-  transform: scale(1.2);
+.watchlist-items-div > a {
+  width: 100%;
 }
 
-.watchlist-items-div i:hover {
+.watchlist-items-div > a:hover {
+  background: rgba(255, 255, 255, 0.1)
+}
+
+.watchlist-items-div > i:hover {
   transform: scale(1.3);
 }
 
