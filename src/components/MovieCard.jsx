@@ -26,10 +26,6 @@ export default function MovieCard(props) {
     }
   }
 
-  const refreshPage = () => {
-    window.location.reload()
-  }
-
   function addToWatchlist() {
     if (!selectedWatchlist) {
       alert('Please select a watchlist from the options')
@@ -71,7 +67,7 @@ export default function MovieCard(props) {
     localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist))
     setDropdownVisible(false)
     alert(`Added movie to ${selectedWatchlist}`)
-    refreshPage()
+    window.location.reload()
   }
 
   const emoji =

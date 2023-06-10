@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, Link, useOutletContext } from "react-router-dom"
 
 export default function EditWatchlist() {
     const navigate = useNavigate()
@@ -7,7 +7,8 @@ export default function EditWatchlist() {
     const searchParams = new URLSearchParams(location.search)
     const watchlistName = searchParams.get("name")
     const [allWatchlist, setAllWatchlist] = useState([])
-
+    const {setRefresh} = useOutletContext()
+    
     const [watchlist, setWatchlist] = useState({
         name: "",
         description: "",
@@ -25,6 +26,8 @@ export default function EditWatchlist() {
 
         if (foundWatchlist) {
             setWatchlist(foundWatchlist)
+        } else {
+            setAllWatchlist(null)
         }
     }, [watchlistName])
 
@@ -65,9 +68,21 @@ export default function EditWatchlist() {
         navigate(`/watchlist/${watchlist.name}`)
     }
 
+    if (!allWatchlist) {
+        return (
+          <div className="invalid-watchlist">
+            <p>This Watchlist does not Exist 😢</p>
+            <Link to="/">
+              <button className="return-home">Return to Homepage</button>
+            </Link>
+          </div>
+        );
+      }
+
     const movieList = watchlist.movies.map((movie) => (
-        <div key={movie.id} className="movie-item">
-            <span>{movie.name}</span>
+        <div key={movie.id} className="edit-watchlist-movie">
+            <img src={movie.image} />
+            <p>{movie.name} <span>({movie.year})</span></p>
             <button onClick={() => handleRemoveMovie(movie.id)}>Remove</button>
         </div>
     ))
@@ -82,6 +97,7 @@ export default function EditWatchlist() {
                 (watchlist) => watchlist.name !== watchlistName
             )
             localStorage.setItem("allWatchlist", JSON.stringify(updatedWatchlist))
+            setRefresh(prev => !prev)
             navigate("/")
         }
     }
@@ -96,31 +112,37 @@ export default function EditWatchlist() {
                 Delete watchList
             </p>
         </div>
-    <form onSubmit={handleSubmit} className="create-watchlist-form">
-        <label>
-        Name
-        <input
-            className="create-watchlist-input"
-            type="text"
-            name="name"
-            value={watchlist.name}
-            onChange={handleChange}
-            required
-        />
-        </label>
-        <label>
-        Description
-        <textarea
-            className="create-watchlist-textarea"
-            name="description"
-            value={watchlist.description}
-            onChange={handleChange}
-            required
-        />
-        </label>
-        <div className="movie-list">{movieList}</div>
-        <button type="submit" className="create-watchlist-button">Save Changes</button>
-    </form>
+        <form onSubmit={handleSubmit} className="create-watchlist-form">
+            <label>
+            Name
+            <input
+                className="create-watchlist-input"
+                type="text"
+                name="name"
+                value={watchlist.name}
+                onChange={handleChange}
+                required
+            />
+            </label>
+            <label>
+            Description
+            <textarea
+                className="create-watchlist-textarea"
+                name="description"
+                value={watchlist.description}
+                onChange={handleChange}
+                required
+            />
+            </label>
+            {movieList.length > 0 && <h3>Movies</h3>}
+            <div className="edit-watchlist-movie-list">{movieList}</div>
+            <button 
+                type="submit" 
+                className="create-watchlist-button save-edit-watchlist"
+            >
+                Save Changes
+            </button>
+        </form>
     </div>
     )
 }

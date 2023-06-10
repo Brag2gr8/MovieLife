@@ -32,7 +32,6 @@ a {
 /*** INVALID PAGE  ****/
 
 .invalid-page {
-  height: 100vh;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -83,6 +82,11 @@ font-size: 24px;
 
 header .cancel {
 transform: rotate(90deg);
+}
+
+.outlet-div {
+  height: 100vh;
+  overflow: auto;
 }
 
 .home {
@@ -429,13 +433,14 @@ transform: rotate(90deg);
 
 /***  MOVIE DETAILS***/
 
-.movie-details-page {padding: 25px;}
+.movie-details-page {padding: 25px; }
 .movie-details-page > h2 {margin: 100px 0 30px;}
 
 .movie-main-details {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  position: relative;
 }
 
 .movie-main-details > img {
@@ -593,7 +598,7 @@ transform: rotate(90deg);
 }
 
 .create-watchlist-page {
-  padding: 35px 30px 100vh;
+  padding: 35px 30px ;
 }
 
 .create-watchlist-form {
@@ -643,6 +648,16 @@ transform: rotate(90deg);
   padding: 35px 30px 50vh;
 }
 
+.invalid-watchlist {
+  width: 100%;
+  text-align: center;
+  margin-top: 150px;
+}
+
+.invalid-watchlist .return-home {
+  margin-top: 20px;
+}
+
 .watchlist-title {
   display: flex;
   align-items: center;
@@ -663,10 +678,10 @@ transform: rotate(90deg);
 }
 
 .watchlist-sub-details > div {
-  width: fit-content;
+  width: 100px;
   border: 1px solid var(--red);
   text-align: center;
-  padding: 15px;
+  padding: 15px 5px;
   display: flex;
   flex-direction: column;
   gap: 21px
@@ -691,14 +706,47 @@ transform: rotate(90deg);
 
 .watchlist-movies > div > div {max-width: 220px;}
 
-/*** HISTORY ***/
+.edit-watchlist-page {padding-bottom: 30px;}
 
-/*** HISTORY ***/
+.edit-watchlist-page h3 {
+  margin-top: 30px;
+}
 
-.history-page {
+.edit-watchlist-movie-list {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
+
+.edit-watchlist-movie {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--line-color);
+  border-radius: 4px;
+  padding-right: 10px;
+}
+
+.edit-watchlist-movie img {height: 100%;}
+.edit-watchlist-movie > p {font-weight: 700;}
+.edit-watchlist-movie > p> span {font-weight: 300;}
+
+.edit-watchlist-movie button {
+  justify-self: end;
+  margin-left: auto;
+  border: 1px solid var(--red);
+  border-radius: 5px;
+  padding: 5px 5px;
+  background-color: transparent;
+  color: var(--writing-color);
+}
+
+
+/*** HISTORY ***/
+
 
 .history-header {
   display: flex;
