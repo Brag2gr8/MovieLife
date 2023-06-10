@@ -3,11 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
 export default function WatchList() {
-  const [watchlist, setWatchlist] = useState({
-    name: "Invalid Watchlist",
-    description: "If you are seeing this, please select a valid watchlist",
-    movies: [],
-  });
+  const [watchlist, setWatchlist] = useState(null);
   const { name: watchlistName } = useParams();
   const topRef = useRef();
 
@@ -21,12 +17,25 @@ export default function WatchList() {
 
     if (foundWatchlist) {
       setWatchlist(foundWatchlist);
+    } else {
+      setWatchlist(null); // Set watchlist to null if it doesn't exist
     }
 
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [watchlistName]);
+
+  if (watchlist === null) {
+    return (
+      <div className="invalid-watchlist">
+        <p>This Watchlist does not Exist 😢</p>
+        <Link to="/">
+          <button className="return-home">Return to Homepage</button>
+        </Link>
+      </div>
+    );
+  }
 
   function getAverageRating(arr) {
     let totalRating = 0;
@@ -88,7 +97,7 @@ export default function WatchList() {
           </div>
         </div>
         <div className="search-page watchlist-movies">
-          <h2>Movies in watchlist</h2>
+          <h2>Movies in Watchlist</h2>
           <div className="movie-tray">{watchlistEl}</div>
         </div>
       </>
