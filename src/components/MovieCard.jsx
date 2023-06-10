@@ -1,63 +1,77 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import awful from '../assets/awfulEmoji.png';
-import normal from '../assets/normalEmoji.png';
-import great from '../assets/greatEmoji.png';
-import ribbon from '../assets/ribbon.svg';
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import awful from '../assets/awfulEmoji.png'
+import normal from '../assets/normalEmoji.png'
+import great from '../assets/greatEmoji.png'
+import ribbon from '../assets/ribbon.svg'
 
 export default function MovieCard(props) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedWatchlist, setSelectedWatchlist] = useState('');
-  const [watchlistItems, setWatchlistItems] = useState([]);
+  const [isDropdownVisible, setDropdownVisible] = useState(false)
+  const [selectedWatchlist, setSelectedWatchlist] = useState('')
+  const [watchlistItems, setWatchlistItems] = useState([])
 
   useEffect(() => {
-    const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || [];
-    setWatchlistItems(watchlist);
-  }, []);
+    const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || []
+    setWatchlistItems(watchlist)
+  }, [])
 
-  const {id, name,image, year, rating, isWatchlist } = props;
+  const {id, name,image, year, rating, isWatchlist } = props
 
   function openWatchlistSelect() {
     if (watchlistItems.length === 0) {
-      alert('Create a watchlist first to add the movie.');
+      alert('Create a watchlist first to add the movie.')
     } else {
-      setDropdownVisible(true);
+      setDropdownVisible(true)
     }
   }
 
+  const refreshPage = () => {
+    window.location.reload()
+  }
+
   function addToWatchlist() {
-    if (selectedWatchlist) {
-      const updatedWatchlist = watchlistItems.map((watchlist) => {
-        if (watchlist.name === selectedWatchlist) {
-          const movieExists = watchlist.movies.some((movie) => movie.id === id);
-  
-          if (!movieExists) {
-            return {
-              ...watchlist,
-              movies: [
-                ...watchlist.movies,
-                {
-                  id: props.id,
-                  image: props.image,
-                  name: props.name,
-                  year: props.year,
-                  rating: props.rating,
-                },
-              ],
-            };
-          } else {
-            alert('Movie already exists in this watchlist.');
-          }
-        }
-        return watchlist;
-      });
-  
-      localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
-      setDropdownVisible(false);
-    } else {
-      alert('Please select a watchlist from the options');
+    if (!selectedWatchlist) {
+      alert('Please select a watchlist from the options')
+      return
     }
+  
+    const watchlist = watchlistItems.find((w) => w.name === selectedWatchlist)
+    if (!watchlist) {
+      alert('Invalid watchlist')
+      return
+    }
+  
+    const movieExists = watchlist.movies.some((movie) => movie.id === id)
+    if (movieExists) {
+      alert('Movie already exists in this watchlist.')
+      setDropdownVisible(false)
+      return
+    }
+  
+    const updatedWatchlist = watchlistItems.map((w) => {
+      if (w.name === selectedWatchlist) {
+        return {
+          ...w,
+          movies: [
+            ...w.movies,
+            {
+              id,
+              image,
+              name,
+              year,
+              rating,
+            },
+          ],
+        }
+      }
+      return w
+    })
+  
+    localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist))
+    setDropdownVisible(false)
+    alert(`Added movie to ${selectedWatchlist}`)
+    refreshPage()
   }
 
   const emoji =
@@ -67,7 +81,7 @@ export default function MovieCard(props) {
       <img src={normal} alt="Normal Emoji" />
     ) : (
       rating >= 75 && <img src={great} alt="Great Emoji" />
-    );
+    )
 
   return (
     <div className="movie-card">
@@ -118,5 +132,5 @@ export default function MovieCard(props) {
         </div>
       )}
     </div>
-  );
+  )
 }
