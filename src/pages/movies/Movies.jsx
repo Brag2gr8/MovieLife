@@ -32,13 +32,12 @@ export async function loader() {
 export default function Movies() {
 
     const {
-        popularMovies, 
-        trendingMovies, 
-        topRatedMovies, 
-        nowPlayingMovies, 
-        upcomingMovies
+      popularMovies, 
+      trendingMovies, 
+      topRatedMovies, 
+      nowPlayingMovies, 
+      upcomingMovies
     } = useLoaderData()
-    
     
   // Function to render 10 movies in movie tray
   function renderMovie(movieType, movieHeader) {
