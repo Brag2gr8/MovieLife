@@ -23,7 +23,7 @@ export async function loader() {
     topRatedMovies, 
     nowPlayingMovies, 
     upcomingMovies
-    };
+  };
 }
 
 
