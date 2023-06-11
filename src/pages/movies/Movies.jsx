@@ -29,12 +29,13 @@ export async function loader() {
 export default function Movies() {
   // Accessing the loader data using useLoaderData hook
   const {
-    popularMovies, 
-    trendingMovies, 
-    topRatedMovies, 
-    nowPlayingMovies, 
+    popularMovies,
+    trendingMovies,
+    topRatedMovies,
+    nowPlayingMovies,
     upcomingMovies
-  } = useLoaderData()
+  } = useLoaderData();
+
   
   // Function to render 10 movies in movie tray
   function renderMovie(movieType, movieHeader) {
