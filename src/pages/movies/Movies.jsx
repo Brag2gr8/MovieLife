@@ -18,11 +18,11 @@ export async function loader() {
     const {returnedMovies: upcomingMovies} = await getUpcomingMovies()
 
     return {
-        popularMovies, 
-        trendingMovies, 
-        topRatedMovies, 
-        nowPlayingMovies, 
-        upcomingMovies
+      popularMovies, 
+      trendingMovies, 
+      topRatedMovies, 
+      nowPlayingMovies, 
+      upcomingMovies
     };
 }
 
