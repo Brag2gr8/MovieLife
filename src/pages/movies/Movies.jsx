@@ -11,17 +11,17 @@ import MovieCard from "../../components/MovieCard"
 
 export async function loader() {
     
-  const { returnedMovies: popularMovies } = await getPopularMovies()
-  const { returnedMovies: trendingMovies } = await getTrendingMovies()
-  const { returnedMovies: nowPlayingMovies } = await getNowPlayingMovies()
-  const { returnedMovies: topRatedMovies } = await getTopRatedMovies()
-  const { returnedMovies: upcomingMovies } = await getUpcomingMovies()
+  const { returnedMovies: popularMovies } = await getPopularMovies();
+  const { returnedMovies: trendingMovies } = await getTrendingMovies();
+  const { returnedMovies: nowPlayingMovies } = await getNowPlayingMovies();
+  const { returnedMovies: topRatedMovies } = await getTopRatedMovies();
+  const { returnedMovies: upcomingMovies } = await getUpcomingMovies();
 
   return {
-    popularMovies, 
-    trendingMovies, 
-    topRatedMovies, 
-    nowPlayingMovies, 
+    popularMovies,
+    trendingMovies,
+    topRatedMovies,
+    nowPlayingMovies,
     upcomingMovies
   };
 }
