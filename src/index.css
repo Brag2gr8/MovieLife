@@ -19,6 +19,10 @@ html , body {
 h2, h4 {font-weight: 400}
 button {cursor: pointer}
 
+hr {
+ border: 3px solid var(--red)
+}
+
 a {
   text-decoration: none;
   color: inherit;
