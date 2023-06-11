@@ -20,7 +20,6 @@ export default function CreateWatchList() {
 
   // Navigate function from react-router-dom to handle routing
   const navigate = useNavigate();
-    
 // useEffect hook to load existing watchlist data from local storage
   useEffect(() => {
     const existingWatchList = localStorage.getItem("allWatchlist");
