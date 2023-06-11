@@ -95,6 +95,9 @@ transform: rotate(90deg);
   padding: 24px 17px;
 }
 
+ hr {
+  border: 3px solid var(--red)
+}
 
 .home-section {
   background: var(--line-color);
