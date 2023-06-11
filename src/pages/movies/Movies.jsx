@@ -36,7 +36,6 @@ export default function Movies() {
     upcomingMovies
   } = useLoaderData();
 
-  
   // Function to render 10 movies in movie tray
   function renderMovie(movieType, movieHeader) {
     const movieTray = movieType.slice(0, 10).map((movie) => {
