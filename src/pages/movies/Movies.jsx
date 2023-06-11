@@ -38,27 +38,28 @@ export default function Movies() {
         nowPlayingMovies, 
         upcomingMovies
     } = useLoaderData()
-
-    console.log(popularMovies)
     
-    function renderMovie(movieType, movieHeader) {
-        const movieTray = movieType.slice(0, 10).map(movie => {
-            return <MovieCard
-                key={movie.id}
-                id={movie.id}
-                name={movie.name}
-                rating={movie.rating}
-                image={movie.image}
-                year={movie.year}
-            />
-        })
-        
-        return (
-            <>
-                <div className="movie-type" >
-                    <h2>{movieHeader}</h2>
-                </div>
-                  <section className="movie-tray">{movieTray}</section>
+    // Function to render 10 movies in movie tray
+  function renderMovie(movieType, movieHeader) {
+    const movieTray = movieType.slice(0, 10).map((movie) => {
+      return (
+        <MovieCard
+          key={movie.id}
+          id={movie.id}
+          name={movie.name}
+          rating={movie.rating}
+          image={movie.image}
+          year={movie.year}
+        />
+      );
+    });
+
+    return (
+      <>
+        <div className="movie-type">
+          <h2>{movieHeader}</h2>
+        </div>
+        <section className="movie-tray">{movieTray}</section>
       </>
     );
   }
