@@ -84,5 +84,5 @@ export default function Movies() {
             <hr/>
             {renderMovie(upcomingMovies, "UPCOMING")}
         </div>
-    )
+    );
 }
