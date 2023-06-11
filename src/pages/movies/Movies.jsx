@@ -23,19 +23,19 @@ export async function loader() {
         topRatedMovies, 
         nowPlayingMovies, 
         upcomingMovies
-    }
+    };
 }
 
 
 export default function Movies() {
 
-    const {
-      popularMovies, 
-      trendingMovies, 
-      topRatedMovies, 
-      nowPlayingMovies, 
-      upcomingMovies
-    } = useLoaderData()
+  const {
+    popularMovies, 
+    trendingMovies, 
+    topRatedMovies, 
+    nowPlayingMovies, 
+    upcomingMovies
+  } = useLoaderData()
    
   // Function to render 10 movies in movie tray
   function renderMovie(movieType, movieHeader) {
