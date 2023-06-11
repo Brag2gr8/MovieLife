@@ -10,7 +10,6 @@ import {
 import MovieCard from "../../components/MovieCard"
 
 export async function loader() {
-    
   const { returnedMovies: popularMovies } = await getPopularMovies();
   const { returnedMovies: trendingMovies } = await getTrendingMovies();
   const { returnedMovies: nowPlayingMovies } = await getNowPlayingMovies();
