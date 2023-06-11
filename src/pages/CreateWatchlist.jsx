@@ -4,12 +4,13 @@ import { nanoid } from "nanoid"
 
 
 export default function CreateWatchList() {
- // State to hold the current watchlist data
+  // State to hold the current watchlist data
   const [currentWatchlist, setCurrentWatchlist] = useState([]);
 
   // Accessing the refresh function from the outlet context
   const { setRefresh } = useOutletContext();
 
+  
   // State to hold the form data for creating a new watchlist
   const [formData, setFormData] = useState({
     id: nanoid(),
