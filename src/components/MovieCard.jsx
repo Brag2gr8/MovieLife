@@ -50,7 +50,6 @@ export default function MovieCard(props) {
         return {
           ...w,
           movies: [
-            ...w.movies,
             {
               id,
               image,
@@ -58,6 +57,7 @@ export default function MovieCard(props) {
               year,
               rating,
             },
+            ...w.movies,
           ],
         }
       }

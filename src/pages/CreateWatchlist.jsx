@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useOutletContext } from "react-router-dom"
-import { nanoid } from "nanoid"
-
+import { useEffect, useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 export default function CreateWatchList() {
   // State to hold the current watchlist data
@@ -20,7 +19,8 @@ export default function CreateWatchList() {
 
   // Navigate function from react-router-dom to handle routing
   const navigate = useNavigate();
-// useEffect hook to load existing watchlist data from local storage
+
+  // useEffect hook to load existing watchlist data from local storage
   useEffect(() => {
     const existingWatchList = localStorage.getItem("allWatchlist");
     const data = JSON.parse(existingWatchList);
@@ -30,16 +30,17 @@ export default function CreateWatchList() {
     }
   }, [currentWatchlist.length]);
 
-    function handleChange(e) {
-        const {name, value} = e.target
+  // Event handler for input changes in the form
+  function handleChange(e) {
+    const { name, value } = e.target;
 
-        setFormData(prev => {
-            return {
-                ...prev,
-                [name]: value
-            }
-        })
-    }
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  }
 
   // Event handler for form submission
   function handleSubmit(e) {

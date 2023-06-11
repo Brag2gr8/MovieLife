@@ -129,35 +129,35 @@ export default function MovieDetail() {
   return (
     <div className="movie-details-page" ref={topRef}>
       <div className="movie-main-details">
-        {isDropdownVisible && (
-            <div className="watchlist-dropdown">
-            <span
-                className="movie-card-cancel-modal"
-                onClick={() => setDropdownVisible(false)}
-            >
-                X
-            </span>
-            <div className="movie-card-modal">
-                <div className="movie-card-modal-content">
-                <h3>Select a watchlist</h3>
-                <select
-                    value={selectedWatchlist}
-                    onChange={(e) => setSelectedWatchlist(e.target.value)}
-                >
-                    <option value="">Select a watchlist</option>
-                    {watchlistItems.map((watchlist, i) => (
-                    <option key={i} value={watchlist.name}>
-                        {watchlist.name}
-                    </option>
-                    ))}
-                </select>
-                <button onClick={addToWatchlist}>Add to Watchlist</button>
-                </div>
-            </div>
-            </div>
-        )}
         <img src={movie.image} />
         <div className="movie-text-details">
+          {isDropdownVisible && (
+              <div className="watchlist-dropdown">
+              <span
+                  className="movie-card-cancel-modal"
+                  onClick={() => setDropdownVisible(false)}
+              >
+                  X
+              </span>
+              <div className="movie-card-modal">
+                  <div className="movie-card-modal-content">
+                  <h3>Select a watchlist</h3>
+                  <select
+                      value={selectedWatchlist}
+                      onChange={(e) => setSelectedWatchlist(e.target.value)}
+                  >
+                      <option value="">Select a watchlist</option>
+                      {watchlistItems.map((watchlist, i) => (
+                      <option key={i} value={watchlist.name}>
+                          {watchlist.name}
+                      </option>
+                      ))}
+                  </select>
+                  <button onClick={addToWatchlist}>Add to Watchlist</button>
+                  </div>
+              </div>
+              </div>
+          )}
           <div className="movie-title-year">
             <h1>{movie.title}</h1>
             <span>({movie.year})</span>

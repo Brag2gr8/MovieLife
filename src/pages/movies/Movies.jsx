@@ -1,14 +1,14 @@
-/* eslint-disable react-refresh/only-export-components */
-import { Link, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom";
 import {
-    getTrendingMovies,
-    getPopularMovies,
-    getNowPlayingMovies,
-    getTopRatedMovies,
-    getUpcomingMovies
-} from "../../../utils"
-import MovieCard from "../../components/MovieCard"
+  getTrendingMovies,
+  getPopularMovies,
+  getNowPlayingMovies,
+  getTopRatedMovies,
+  getUpcomingMovies
+} from "../../../utils";
+import MovieCard from "../../components/MovieCard";
 
+// Loader function to fetch movie data
 export async function loader() {
   const { returnedMovies: popularMovies } = await getPopularMovies();
   const { returnedMovies: trendingMovies } = await getTrendingMovies();
@@ -24,7 +24,6 @@ export async function loader() {
     upcomingMovies
   };
 }
-
 
 export default function Movies() {
   // Accessing the loader data using useLoaderData hook

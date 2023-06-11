@@ -190,7 +190,8 @@ transform: rotate(90deg);
 .movie-card:hover {transform: scale(1.05);}
 
 .movie-card-image {
-  width: 100%
+  width: 100%;
+  border-radius: 6px;
 }
 
 .movie-ribbon {
@@ -444,7 +445,6 @@ transform: rotate(90deg);
   display: flex;
   flex-direction: column;
   gap: 30px;
-  position: relative;
 }
 
 .movie-main-details > img {
@@ -455,6 +455,7 @@ transform: rotate(90deg);
 .movie-text-details {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .movie-title-year,
@@ -559,7 +560,8 @@ transform: rotate(90deg);
 }
 
 .movie-trailer iframe {
-  width: 100%
+  width: 100%;
+  border-radius: 10px;
 }
 
 /*** WATCHLIST ***/
@@ -700,7 +702,7 @@ transform: rotate(90deg);
   padding: 0;
 }
 
-.watchlist-movies h2 {
+.watchlist-movies > h2 {
   margin-bottom: 30px;
 }
 
@@ -789,7 +791,10 @@ transform: rotate(90deg);
     flex-direction: row;
     gap: 45px;
   }
-  .movie-main-details img {width: 30%;}
+  .movie-main-details img {
+    width: 30%;
+    border-radius: 6px;
+  }
 
   .movie-rating-watchlist {
     justify-content: start;
@@ -803,5 +808,7 @@ transform: rotate(90deg);
   .watchlist-items {
     height: 25%;
   }
+  
+  .watchlist-sub-details > div { width: fit-content;}
 
 }
