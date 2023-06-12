@@ -748,9 +748,7 @@ transform: rotate(90deg);
   color: var(--writing-color);
 }
 
-
 /*** HISTORY ***/
-
 
 .history-header {
   display: flex;
@@ -766,6 +764,52 @@ transform: rotate(90deg);
 .history-header p:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+/***  AUTHENTICATION  ***/
+
+.signup-page {
+  padding: 0 100px 50px
+}
+
+.signup-page > p {
+  color: var(--red);
+  margin-top: 20px;
+  text-align: center;
+}
+
+.signup-page > h2 {
+  margin: 20px auto;
+  width: fit-content;
+  color: var(--red);
+}
+
+.signup-form button {
+  margin: 0 auto;
+}
+
+.signup-form input:valid {
+  background: transparent;
+}
+
+.account-picture {
+  width: 30%;
+  margin: 20px auto;
+  border-radius: 50%;
+}
+
+.custom-file-input {
+  display: none; /* Hide the default file input button */
+}
+
+.custom-file-label {
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-file-label:hover {
+  color: var(--red);
+  transform: scale(1.1);
 }
 
 /***  MEDIA QUERIES***/
@@ -810,5 +854,6 @@ transform: rotate(90deg);
   }
   
   .watchlist-sub-details > div { width: fit-content;}
+  .signup-page {padding: 0 250px 50px}
 
 }
