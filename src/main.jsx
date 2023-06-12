@@ -15,6 +15,8 @@ import CreateWatchlist from "./pages/CreateWatchlist";
 import EditWatchlist from "./pages/EditWatchList";
 import Watchlist from "./pages/Watchlist";
 import InvalidPage from "./pages/InvalidPage";
+import Login from "./pages/userAuth/LogIn"
+import SignUp from "./pages/userAuth/SignUp"
 
 const movieLife = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<HomeLayout />} >
@@ -35,6 +37,8 @@ const movieLife = createBrowserRouter(createRoutesFromElements(
     <Route path="create-watchList" element={<CreateWatchlist />} />
     <Route path="edit-watchList" element={<EditWatchlist />} />
     <Route path="watchlist/:name" element={<Watchlist />} />
+    <Route path="login" element={<Login />} />
+    <Route path="signup" element={<SignUp />}/>
     <Route path="*" element={<InvalidPage />} />
   </Route>
 ));
