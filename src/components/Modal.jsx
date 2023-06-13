@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
 import SearchForm from "./SearchForm"
-import profile from "../assets/profile-dummy.png"
 import { NavLink, useNavigate } from "react-router-dom"
 import mLogo from "../assets/mLogo.png"
 import { useEffect, useState } from "react"
+import Profile from "./Profile"
 
 export default function Modal(props) {
     const [allWatchlist, setAllWatchlist] = useState([])
@@ -109,13 +109,7 @@ export default function Modal(props) {
                 <p>All created watchlists will automatically appear here !</p>}
                 {watchlistEl}
             </div>
-            <div className="modal-profile">
-                <div className="guest">
-                    <img src={profile} />
-                    <p>Guest</p>
-                </div>
-                <i className="fa-solid fa-ellipsis"></i>
-            </div>
+            <Profile setIsOpen={setIsOpen}/>
         </div>
     )
 }

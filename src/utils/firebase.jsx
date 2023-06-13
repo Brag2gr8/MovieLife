@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { useState, useEffect } from "react";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -40,9 +41,60 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     } catch (error) {
       console.log("Error creating user", error.message);
     }
+  } else {
+    // User profile already exists, update the nickname
+    try {
+      await userRef.update({
+        nickname: additionalData.nickname,
+      });
+    } catch (error) {
+      console.log("Error updating nickname", error.message);
+    }
   }
 
   return userRef;
 };
+
+
+export function useAuth() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const signup = (email, password) => {
+    return auth.createUserWithEmailAndPassword(email, password);
+  };
+
+  const login = (email, password) => {
+    return auth.signInWithEmailAndPassword(email, password);
+  };
+
+  const logout = () => {
+    return auth.signOut();
+  };
+
+  const updateProfile = (profileData) => {
+    return currentUser.updateProfile(profileData);
+  };
+
+  return {
+    currentUser,
+    loading,
+    signup,
+    login,
+    logout,
+    updateProfile,
+  };
+}
+
+
 
 export default firebase;

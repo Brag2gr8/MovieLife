@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, createUserProfileDocument } from "../../utils/firebase";
-import { redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import dummy from "../../assets/profile-dummy.png"
 
 const SignUpForm = () => {
@@ -95,17 +95,16 @@ const SignUpForm = () => {
       >
           <img src={profilePlaceholder} className="account-picture"/>
           <label className="custom-file-label">
-            <h4><i className="fa-solid fa-camera"></i> -- Choose An Avatar</h4>
+            <h4><i className="fa-solid fa-camera"></i> -- Choose An Avatar *</h4>
             <input
               className="custom-file-input"
               type="file"
               accept="image/*"
               onChange={handleFileChange}
-              required
             />
           </label>
           <label>
-            Nickname
+            Nickname *
             <input
               className="create-watchlist-input"
               type="text"
@@ -117,7 +116,7 @@ const SignUpForm = () => {
             />
           </label>
           <label>
-            Email
+            Email *
             <input
               className="create-watchlist-input"
               type="email"
@@ -129,18 +128,19 @@ const SignUpForm = () => {
             />
           </label>
           <label>
-            Password
+            Password *
             <input
               className="create-watchlist-input"
               type="password"
               name="password"
               value={formData.password}
-              onChange={handleChange}placeholder="Enter your password"
+              onChange={handleChange}
+              placeholder="Enter your password"
               required
             />
           </label>
           <label>
-            Confirm Password
+            Confirm Password *
             <input
               className="create-watchlist-input"
               type="password"
@@ -159,7 +159,10 @@ const SignUpForm = () => {
           {signingUp ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
-      {error && <p>{error}</p>}
+      <p className="below-alternate-signup">
+        Have an account? <Link to="/login">Log in</Link>
+      </p>
+      {error && <p className="red">{error}</p>}
     </div>
   );
 };

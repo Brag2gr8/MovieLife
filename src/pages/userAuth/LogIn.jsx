@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 
 export default function LoginComponent() {
@@ -16,6 +16,7 @@ export default function LoginComponent() {
       setLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
       setLoading(false);
+      alert("Succesfully logged in")
 
       // Redirect to the home page after successful login
       navigate("/");
@@ -26,29 +27,37 @@ export default function LoginComponent() {
   };
 
   return (
-    <div className="signup-page">
+    <div className="login-page">
       <h2>Login</h2>
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
       <form 
         onSubmit={handleLogin}
         className="create-watchlist-form signup-form"
       >
-        <input
-          className="create-watchlist-input"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          className="create-watchlist-input"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <label>
+          Email *
+          <input
+            className="create-watchlist-input"
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Enter a valid email address"
+          />
+        </label>
+        <label>
+          Password *
+          <input
+            className="create-watchlist-input"
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            required
+          />
+        </label>
         <button 
             type="submit" 
             disabled={loading}
@@ -57,6 +66,9 @@ export default function LoginComponent() {
           {loading ? "logging in" : "Login"}
         </button>
       </form>
+      <p className="below-alternate-signup">
+        Or create an account? <Link to="/signup">Here</Link>
+      </p>
     </div>
   );
 }
