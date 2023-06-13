@@ -768,17 +768,39 @@ transform: rotate(90deg);
 
 /***  AUTHENTICATION  ***/
 
-.signup-page {
+.signup-page{
   padding: 0 100px 50px
 }
 
-.signup-page > p {
+.login-page {
+  padding: 50px 100px 50px
+}
+
+.error {
   color: var(--red);
   margin-top: 20px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.signup-page > h2 {
+.below-alternate-signup {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.below-alternate-signup > a {
+  color: var(--red);
+  margin-left: 10px;
+}
+
+.below-alternate-signup > a:hover {
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.signup-page > h2,
+.login-page > h2 {
   margin: 20px auto;
   width: fit-content;
   color: var(--red);
@@ -810,6 +832,39 @@ transform: rotate(90deg);
 .custom-file-label:hover {
   color: var(--red);
   transform: scale(1.1);
+}
+
+
+.loading {
+  margin: 150px 100px;
+}
+
+.text-reveal {
+  display: inline-block;
+  overflow: hidden;
+  animation: reveal ease-in-out 2s infinite;
+}
+
+.text {
+  white-space: nowrap;
+}
+
+@keyframes reveal {
+  0% {
+    width: 0;
+  }
+  25% {
+    width: 25%;
+  }
+  50% {
+    width: 50%;
+  }
+  75% {
+    width: 75%;
+  }
+  100% {
+    width: 0;
+  }
 }
 
 /***  MEDIA QUERIES***/
