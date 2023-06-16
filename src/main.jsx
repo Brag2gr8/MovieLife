@@ -1,5 +1,10 @@
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from "react-router-dom";
+import ReactDOM from 'react-dom/client';
+import { 
+  createBrowserRouter, 
+  RouterProvider, 
+  createRoutesFromElements, 
+  Route 
+} from "react-router-dom";
 import HomeLayout from "./components/HomeLayout";
 import Home, { loader as homeLoader } from "./pages/Home";
 import Movies, { loader as MoviesLoader } from "./pages/movies/Movies";
@@ -12,7 +17,7 @@ import Upcoming from "./pages/movies/Upcoming";
 import Search from "./pages/Search";
 import History from "./pages/History";
 import CreateWatchlist from "./pages/CreateWatchlist";
-import EditWatchlist from "./pages/EditWatchList";
+import EditWatchlist from "./pages/EditWatchlist";
 import Watchlist from "./pages/Watchlist";
 import InvalidPage from "./pages/InvalidPage";
 import Login from "./pages/userAuth/LogIn"
@@ -50,7 +55,6 @@ function App() {
     <RouterProvider router={movieLife} />
   );
 }
+const root = ReactDOM.createRoot(document.getElementById('root'))
 
-createRoot(document.getElementById("root")).render(
-  <App />
-);
+root.render(<App />);

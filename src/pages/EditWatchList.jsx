@@ -1,6 +1,5 @@
-<<<<<<< Updated upstream
-import { useEffect, useState } from "react"
-import { useLocation, useNavigate, Link, useOutletContext } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, Link, useOutletContext } from "react-router-dom";
 
 export default function EditWatchlist() {
     const navigate = useNavigate()
@@ -8,7 +7,7 @@ export default function EditWatchlist() {
     const searchParams = new URLSearchParams(location.search)
     const watchlistName = searchParams.get("name")
     const [allWatchlist, setAllWatchlist] = useState([])
-    const {setRefresh} = useOutletContext()
+    const { setRefresh } = useOutletContext()
     
     const [watchlist, setWatchlist] = useState({
         name: "",
@@ -146,90 +145,4 @@ export default function EditWatchlist() {
         </form>
     </div>
     )
-=======
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
-export default function EditWatchlist() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const watchlistName = searchParams.get("name");
-
-  const [watchlist, setWatchlist] = useState({
-    name: "",
-    description: "",
-    movies: [],
-  });
-
-  useEffect(() => {
-    const existingWatchlist = localStorage.getItem("allWatchlist");
-    const parsedWatchlist = JSON.parse(existingWatchlist);
-
-    const foundWatchlist = parsedWatchlist.find(
-      (data) => data.name === watchlistName
-    );
-
-    if (foundWatchlist) {
-      setWatchlist(foundWatchlist);
-    }
-  }, [watchlistName]);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setWatchlist((prevWatchlist) => ({
-      ...prevWatchlist,
-      [name]: value,
-    }));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const existingWatchlist = localStorage.getItem("allWatchlist");
-    const parsedWatchlist = JSON.parse(existingWatchlist);
-
-    const updatedWatchlist = parsedWatchlist.map((data) => {
-      if (data.name === watchlistName) {
-        return {
-          ...data,
-          name: watchlist.name,
-          description: watchlist.description,
-        };
-      }
-      return data;
-    });
-
-    localStorage.setItem("allWatchlist", JSON.stringify(updatedWatchlist));
-    navigate(`/watchlist/${watchlist.name}`);
-  }
-
-  return (
-    <div className="edit-watchlist-page">
-      <h2>Edit Watchlist</h2>
-      <form onSubmit={handleSubmit} className="edit-watchlist-form">
-        <label>
-          Name
-          <input
-            type="text"
-            name="name"
-            value={watchlist.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Description
-          <textarea
-            name="description"
-            value={watchlist.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
-  );
->>>>>>> Stashed changes
 }

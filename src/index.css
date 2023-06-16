@@ -628,6 +628,7 @@ transform: rotate(90deg);
   border-radius: 6px;
   color:var(--writing-color);
   padding: 13px 22px;
+  font-family: inherit;
 }
 
 .create-watchlist-input:focus,
