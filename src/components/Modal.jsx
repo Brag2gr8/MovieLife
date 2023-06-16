@@ -2,11 +2,13 @@
 
 import SearchForm from "./SearchForm"
 import { NavLink, useNavigate } from "react-router-dom"
-import mLogo from "../assets/mLogo.png"
 import { useEffect, useState } from "react"
+import { useAuth } from "../utils/firebase"
 import Profile from "./Profile"
+import mLogo from "../assets/mLogo.png"
 
 export default function Modal(props) {
+    const {currentUser} = useAuth()
     const [allWatchlist, setAllWatchlist] = useState([])
     const {isOpen, setIsOpen, refresh, setRefresh } = props
     const style = isOpen ? "show" : "none"
@@ -86,7 +88,7 @@ export default function Modal(props) {
                     to="movies" 
                     style={({isActive}) => isActive ? activeStyle : null}
                     onClick={() => setIsOpen(false)}
-                >
+                    >
                     <i className="fa-solid fa-film"></i>
                     <p>Movies</p>
                 </NavLink>
@@ -94,10 +96,20 @@ export default function Modal(props) {
                     to="history" 
                     style={({isActive}) => isActive ? activeStyle : null}
                     onClick={() => setIsOpen(false)}
-                >
+                    >
                     <i className="fa-solid fa-clock-rotate-left"></i>
                     <p>History</p>
                 </NavLink>
+                { !currentUser && (
+                    <NavLink 
+                        to="/login" 
+                        style={({isActive}) => isActive ? activeStyle : null}
+                        onClick={() => setIsOpen(false)}
+                    >
+                        <i className="fa-solid fa-user"></i>
+                        <p>Login</p>
+                    </NavLink>
+                )}
             </nav>
             <button onClick={() => CreateWatchList()}>
                 + Create watchList
