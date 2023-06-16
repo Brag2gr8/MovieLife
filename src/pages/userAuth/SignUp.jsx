@@ -179,7 +179,7 @@ const SignUpForm = () => {
       <p className="below-alternate-signup">
         Have an account? <Link to="/login">Log in</Link>
       </p>
-      {error && <p className="red">{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };
