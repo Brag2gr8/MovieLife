@@ -93,7 +93,7 @@ export default function Modal(props) {
                     <p>Movies</p>
                 </NavLink>
                 <NavLink 
-                    to="history" 
+                    to="/login" 
                     style={({isActive}) => isActive ? activeStyle : null}
                     onClick={() => setIsOpen(false)}
                     >
