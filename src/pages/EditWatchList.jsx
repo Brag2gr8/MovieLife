@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
-import { useLocation, useNavigate, Link, useOutletContext } from "react-router-dom"
+
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, Link, useOutletContext } from "react-router-dom";
 
 export default function EditWatchlist() {
     const navigate = useNavigate()
@@ -7,7 +8,7 @@ export default function EditWatchlist() {
     const searchParams = new URLSearchParams(location.search)
     const watchlistName = searchParams.get("name")
     const [allWatchlist, setAllWatchlist] = useState([])
-    const {setRefresh} = useOutletContext()
+    const { setRefresh } = useOutletContext()
     
     const [watchlist, setWatchlist] = useState({
         name: "",
