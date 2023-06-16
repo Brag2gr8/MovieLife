@@ -3,12 +3,12 @@
 import SearchForm from "./SearchForm"
 import { NavLink, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { useAuth } from "../utils/firebase"
+import { currentUser } from "../utils/firebase"
 import Profile from "./Profile"
 import mLogo from "../assets/mLogo.png"
 
 export default function Modal(props) {
-    const {currentUser} = useAuth()
+    const user = currentUser()
     const [allWatchlist, setAllWatchlist] = useState([])
     const {isOpen, setIsOpen, refresh, setRefresh } = props
     const style = isOpen ? "show" : "none"
@@ -22,7 +22,7 @@ export default function Modal(props) {
         const existingWatchList = localStorage.getItem("allWatchlist")
         const data = JSON.parse(existingWatchList)
 
-        if(data) {
+        if(data && user) {
             setAllWatchlist(data)
         }
         
@@ -93,14 +93,14 @@ export default function Modal(props) {
                     <p>Movies</p>
                 </NavLink>
                 <NavLink 
-                    to="/login" 
+                    to="/history" 
                     style={({isActive}) => isActive ? activeStyle : null}
                     onClick={() => setIsOpen(false)}
                     >
                     <i className="fa-solid fa-clock-rotate-left"></i>
                     <p>History</p>
                 </NavLink>
-                { !currentUser && (
+                { !user && (
                     <NavLink 
                         to="/login" 
                         style={({isActive}) => isActive ? activeStyle : null}
@@ -118,7 +118,7 @@ export default function Modal(props) {
             <span>My Lists</span>
             <div className="watchlist-items">
                 {watchlistEl.length === 0 && 
-                <p>All created watchlists will automatically appear here !</p>}
+                <p className="success">Log in to view all your watchlist !</p>}
                 {watchlistEl}
             </div>
             <Profile setIsOpen={setIsOpen}/>

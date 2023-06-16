@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 import dummy from "../assets/profile-dummy.png";
 import { useState, useEffect } from "react";
-import { useAuth } from "../utils/firebase";
+import { currentUser, logout } from "../utils/firebase";
 
 export default function Profile(props) {
-  const { currentUser, logout } = useAuth();
+  const user = currentUser();
   const [username, setUsername] = useState(null);
   const [picture, setPicture] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user"));
-    if (currentUser && userData) {
+    if (userData) {
       setUsername(userData.nickname);
       setPicture(userData.profilePicture);
     }
@@ -22,17 +21,13 @@ export default function Profile(props) {
   }
 
   async function handleLogout() {
-    try {
-      await logout();
-      localStorage.removeItem("user");
-    } catch (error) {
-      setError(error.message);
-    }
+    await logout();
+    closeModal()
   }
 
   return (
     <div className="modal-profile" >
-    {currentUser ? (
+    {user ? (
       <>
         <Link
           to="/dashboard"
@@ -52,10 +47,15 @@ export default function Profile(props) {
     ) : (
       <>
         <div className="guest">
-          <img src={picture || dummy} alt="Profile Picture" />
-          <p>{username || "Guest"}</p>
+          <img src={dummy} alt="Profile Picture" />
+          <p>{"Guest"}</p>
         </div>
-        <i className="fa-solid fa-ellipsis"></i>
+        <button 
+          className="little-logout-button"
+          onClick={closeModal}
+        >
+          <Link to="/login">Log in</Link>
+        </button>
       </>
     )}
   </div>

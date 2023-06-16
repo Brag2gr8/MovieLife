@@ -20,9 +20,10 @@ import CreateWatchlist from "./pages/CreateWatchlist";
 import EditWatchlist from "./pages/EditWatchlist";
 import Watchlist from "./pages/Watchlist";
 import InvalidPage from "./pages/InvalidPage";
-import Login from "./pages/userAuth/LogIn"
+import Login, { loader as loginLoader } from "./pages/userAuth/LogIn"
 import SignUp from "./pages/userAuth/SignUp"
 import Dashboard from "./pages/userAuth/Dashboard"
+import { requireAuth } from './utils/authUtils';
 
 const movieLife = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<HomeLayout />} >
@@ -39,11 +40,15 @@ const movieLife = createBrowserRouter(createRoutesFromElements(
       loader={MovieDetailLoader}
     />
     <Route path="search" element={<Search />} />
-    <Route path="history" element={<History />} />
+    <Route 
+      path="history" 
+      element={<History />}
+      loader={async ({ request }) => await requireAuth(request)}
+    />
     <Route path="create-watchList" element={<CreateWatchlist />} />
     <Route path="edit-watchList" element={<EditWatchlist />} />
     <Route path="watchlist/:name" element={<Watchlist />} />
-    <Route path="login" element={<Login />} />
+    <Route path="login" element={<Login />}  loader={loginLoader} />
     <Route path="signup" element={<SignUp />}/>
     <Route path="dashboard" element={<Dashboard />}/>
     <Route path="*" element={<InvalidPage />} />

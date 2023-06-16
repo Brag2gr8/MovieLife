@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../utils/firebase";
+import { currentUser, logout } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { convertBlobToDataURL } from "../../utils/profileUtils";
 
 
 
 const Dashboard = () => {
-  const { currentUser, logout } = useAuth();
+  const user = currentUser();
   const [isUpdating, setIsUpdating] = useState(false)
   const [userData, setUserData] = useState(null)
   const [profilePlaceholder, setProfilePlaceholder] = useState(null)
@@ -15,11 +15,10 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user) {
-      setUserData(user)
-      setProfilePlaceholder(user.profilePicture)
+    const parsedUser = JSON.parse(localStorage.getItem("user"));
+    if (parsedUser) {
+      setUserData(parsedUser)
+      setProfilePlaceholder(parsedUser.profilePicture)
     }
 
   }, []);
@@ -82,7 +81,7 @@ const Dashboard = () => {
     window.location.reload()
   };
 
-  if (currentUser && !currentUser.emailVerified) {
+  if (user && !user.emailVerified) {
     return (
       <div className="signup-page">
         <h2>Email Not Verified</h2>
@@ -100,11 +99,11 @@ const Dashboard = () => {
   return (
     <div className="signup-page dashboard">
       <h2>User Dashboard</h2>
-      {currentUser ? (
+      {user ? (
         <div>
           <div className="dashboard-details">
             <p>Welcome, {userData?.nickname || "User"}!</p>
-            <p>Email: {currentUser.email}</p>
+            <p>Email: {user.email}</p>
             {profilePlaceholder && (
               <>
                 <p>
