@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLoaderData } from "react-router-dom";
 import { auth } from "../../utils/firebase";
+
+export function loader({ request }) {
+  return new URL(request.url).searchParams.get("message")
+}
 
 export default function LoginComponent() {
   const navigate = useNavigate();
@@ -8,6 +12,8 @@ export default function LoginComponent() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const message = useLoaderData()
+  console.log(message)
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -36,6 +42,7 @@ export default function LoginComponent() {
   return (
     <div className="login-page">
       <h2>Login</h2>
+      {message && <p className="success">{message}</p>}
       <form onSubmit={handleLogin} className="create-watchlist-form signup-form">
         <label>
           Email *

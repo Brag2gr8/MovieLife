@@ -579,7 +579,6 @@ transform: rotate(90deg);
   overflow-y: auto;
 }
 
-.watchlist-items > p { color: var(--red);}
 
 .watchlist-items-div {
   display: flex;
@@ -782,11 +781,17 @@ transform: rotate(90deg);
   padding: 50px 100px 50px
 }
 
-.error {
+.error{
   color: var(--red);
   margin-top: 20px;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.success {
+  color: greenyellow;
+  width: fit-content;
+  margin: 20px auto;
 }
 
 .below-alternate-signup {
@@ -821,7 +826,8 @@ transform: rotate(90deg);
 }
 
 .account-picture {
-  width: 30%;
+  width: 100px;
+  height: 100px;
   margin: 20px auto;
   border-radius: 50%;
 }
@@ -842,13 +848,13 @@ transform: rotate(90deg);
 
 
 .loading {
-  margin: 150px 100px;
+  margin: 150px auto;
 }
 
 .text-reveal {
   display: inline-block;
   overflow: hidden;
-  animation: reveal ease-in-out 2s infinite;
+  animation: reveal ease 1.5s infinite;
 }
 
 .text {
@@ -942,6 +948,6 @@ transform: rotate(90deg);
   }
   
   .watchlist-sub-details > div { width: fit-content;}
-  .signup-page {padding: 0 250px 50px}
+  .signup-page, .login-page {padding: 50px 250px}
 
 }
