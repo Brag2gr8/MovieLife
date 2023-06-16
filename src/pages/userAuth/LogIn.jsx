@@ -15,11 +15,18 @@ export default function LoginComponent() {
     try {
       setLoading(true);
       await auth.signInWithEmailAndPassword(email, password);
-      setLoading(false);
-      alert("Succesfully logged in")
+      const user = auth.currentUser;
 
-      // Redirect to the home page after successful login
-      navigate("/");
+      if (user && !user.emailVerified) {
+        setError("Verify your email before logging in");
+        await auth.signOut();
+        setLoading(false);
+        return; // Stop further execution
+      }
+
+      setLoading(false);
+      alert("Successfully logged in");
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -29,11 +36,7 @@ export default function LoginComponent() {
   return (
     <div className="login-page">
       <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form 
-        onSubmit={handleLogin}
-        className="create-watchlist-form signup-form"
-      >
+      <form onSubmit={handleLogin} className="create-watchlist-form signup-form">
         <label>
           Email *
           <input
@@ -58,14 +61,15 @@ export default function LoginComponent() {
             required
           />
         </label>
-        <button 
-            type="submit" 
-            disabled={loading}
-            className="create-watchlist-button"
+        <button
+          type="submit"
+          disabled={loading}
+          className="create-watchlist-button"
         >
           {loading ? "logging in" : "Login"}
         </button>
       </form>
+      {error && <p className="error">{error}</p>}
       <p className="below-alternate-signup">
         Or create an account? <Link to="/signup">Here</Link>
       </p>

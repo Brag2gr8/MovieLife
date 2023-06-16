@@ -362,6 +362,11 @@ transform: rotate(90deg);
   gap: 15px;
 }
 
+.guest img {
+  width: 32px;
+  border-radius: 50%;
+}
+
 .modal-profile i{
   font-size: 21px;
   justify-self: end;
@@ -847,6 +852,33 @@ transform: rotate(90deg);
 
 .text {
   white-space: nowrap;
+}
+
+.dashboard-button, 
+.logout-button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.logout-button {
+  width: 100%;
+  margin: 80px auto;
+}
+
+.dashboard-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center
+}
+
+.little-logout-button {
+  background: var(--writing-color);
+  padding: 5px;
+  border-radius: 6px;
+  font-size: 10px;
+  color: var(--red);
+  font-weight: 700;
 }
 
 @keyframes reveal {
