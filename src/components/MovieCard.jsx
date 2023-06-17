@@ -1,75 +1,80 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import awful from '../assets/awfulEmoji.png'
-import normal from '../assets/normalEmoji.png'
-import great from '../assets/greatEmoji.png'
-import ribbon from '../assets/ribbon.svg'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import awful from '../assets/awfulEmoji.png';
+import normal from '../assets/normalEmoji.png';
+import great from '../assets/greatEmoji.png';
+import ribbon from '../assets/ribbon.svg';
 
-export default function MovieCard(props) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false)
-  const [selectedWatchlist, setSelectedWatchlist] = useState('')
-  const [watchlistItems, setWatchlistItems] = useState([])
+// MovieCard component
+const MovieCard = (props) => {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedWatchlist, setSelectedWatchlist] = useState('');
+  const [watchlistItems, setWatchlistItems] = useState([]);
 
   useEffect(() => {
-    const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || []
-    setWatchlistItems(watchlist)
-  }, [])
+    // Fetch watchlist data from local storage
+    const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || [];
+    setWatchlistItems(watchlist);
+  }, []);
 
-  const {id, name,image, year, rating, isWatchlist } = props
+  const { id, name, image, year, rating, isWatchlist } = props;
 
-  function openWatchlistSelect() {
+  // Open watchlist selection dropdown
+  const openWatchlistSelect = () => {
     if (watchlistItems.length === 0) {
-      alert('Create a watchlist first to add the movie.')
+      alert('Create a watchlist first to add the movie.');
     } else {
-      setDropdownVisible(true)
+      setDropdownVisible(true);
     }
-  }
+  };
 
-  function addToWatchlist() {
+  // Add movie to watchlist
+  const addToWatchlist = () => {
     if (!selectedWatchlist) {
-      alert('Please select a watchlist from the options')
-      return
+      alert('Please select a watchlist from the options');
+      return;
     }
-  
-    const watchlist = watchlistItems.find((w) => w.name === selectedWatchlist)
-    if (!watchlist) {
-      alert('Invalid watchlist')
-      return
-    }
-  
-    const movieExists = watchlist.movies.some((movie) => movie.id === id)
-    if (movieExists) {
-      alert('Movie already exists in this watchlist.')
-      setDropdownVisible(false)
-      return
-    }
-  
-    const updatedWatchlist = watchlistItems.map((w) => {
-      if (w.name === selectedWatchlist) {
-        return {
-          ...w,
-          movies: [
-            {
-              id,
-              image,
-              name,
-              year,
-              rating,
-            },
-            ...w.movies,
-          ],
-        }
-      }
-      return w
-    })
-  
-    localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist))
-    setDropdownVisible(false)
-    alert(`Added movie to ${selectedWatchlist}`)
-    window.location.reload()
-  }
 
+    const watchlist = watchlistItems.find((w) => w.name === selectedWatchlist);
+    if (!watchlist) {
+      alert('Invalid watchlist');
+      return;
+    }
+
+    const movieExists = watchlist.movies.some((movie) => movie.id === id);
+    if (movieExists) {
+      alert('Movie already exists in this watchlist.');
+      setDropdownVisible(false);
+      return;
+    }
+
+  const updatedWatchlist = watchlistItems.map((w) => {
+    if (w.name === selectedWatchlist) {
+      return {
+        ...w,
+        movies: [
+          {
+            id,
+            image,
+            name,
+            year,
+            rating,
+          },
+          ...w.movies,
+        ],
+      };
+    }
+    return w;
+  });
+
+    localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
+    setDropdownVisible(false);
+    alert(`Added movie to ${selectedWatchlist}`);
+    window.location.reload();
+  };
+
+  //Conditionally render rating emoji
   const emoji =
     rating <= 50 ? (
       <img src={awful} alt="Awful Emoji" />
@@ -77,7 +82,7 @@ export default function MovieCard(props) {
       <img src={normal} alt="Normal Emoji" />
     ) : (
       rating >= 75 && <img src={great} alt="Great Emoji" />
-    )
+    );
 
   return (
     <div className="movie-card">
@@ -130,3 +135,5 @@ export default function MovieCard(props) {
     </div>
   )
 }
+
+export default MovieCard 

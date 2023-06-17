@@ -5,6 +5,7 @@ import { getMovieDetails, getTrailer, getCast, getRelatedMovies } from "../../..
 import CastCard from "../../components/CastCard";
 import MovieCard from "../../components/MovieCard";
 
+// Loader function for fetching data during server-side rendering
 export async function loader({ params }) {
   const { id } = params;
 
@@ -16,7 +17,8 @@ export async function loader({ params }) {
   return { movie, cast, trailer, relatedMovies };
 }
 
-export default function MovieDetail() {
+// MovieDetail component
+ const MovieDetail = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedWatchlist, setSelectedWatchlist] = useState("");
   const [watchlistItems, setWatchlistItems] = useState([]);
@@ -24,31 +26,36 @@ export default function MovieDetail() {
   const topRef = useRef();
 
   useEffect(() => {
+    // Fetch watchlist and history from local storage
     const watchlist = JSON.parse(localStorage.getItem("allWatchlist")) || [];
     setWatchlistItems(watchlist);
 
     const history = JSON.parse(localStorage.getItem("history")) || [];
     const isMovieInHistory = history.some((item) => item.id === movie.id);
 
+    // Add movie to history if it doesn't exist
     if (!isMovieInHistory) {
       history.unshift(movie);
       localStorage.setItem("history", JSON.stringify(history));
     }
 
+    // Scroll to top of the page at component mount
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [movie]);
 
-  function openWatchlistSelect() {
+  // Open the watchlist selection dropdown
+  const openWatchlistSelect = () => {
     if (watchlistItems.length === 0) {
       alert("Create a watchlist first to add the movie.");
     } else {
       setDropdownVisible(true);
     }
-  }
+  };
 
-  function addToWatchlist() {
+  // Add movie to the selected watchlist
+  const addToWatchlist = () => {
     if (!selectedWatchlist) {
       alert("Please select a watchlist from the options");
       return;
@@ -59,14 +66,15 @@ export default function MovieDetail() {
       alert("Invalid watchlist");
       return;
     }
-  
+
+    // Check if movie is already in the selected watchlist
     const movieExists = watchlist.movies.some((movieItem) => movieItem.id === movie.id);
     if (movieExists) {
       alert("Movie already exists in this watchlist.");
       setDropdownVisible(false);
       return;
     }
-  
+
     const updatedWatchlist = watchlistItems.map((w) => {
       if (w.name === selectedWatchlist) {
         return {
@@ -85,23 +93,19 @@ export default function MovieDetail() {
       }
       return w;
     });
-  
+
     localStorage.setItem("allWatchlist", JSON.stringify(updatedWatchlist));
     setDropdownVisible(false);
     alert(`Added movie to ${selectedWatchlist}`);
-    window.location.reload()
-  }
-  
+    window.location.reload();
+  };
 
+  // Generate CastCard components
   const castEl = cast.map((el) => (
-    <CastCard
-      key={el.id}
-      name={el.name}
-      character={el.character}
-      image={el.image}
-    />
+    <CastCard key={el.id} name={el.name} character={el.character} image={el.image} />
   ));
 
+  // Generate trailer elements
   const trailerEl = trailer.map((el, i) => (
     <div key={i}>
       <pre>{el.name}</pre>
@@ -115,6 +119,7 @@ export default function MovieDetail() {
     </div>
   ));
 
+  // Generate related movie elements
   const relatedMoviesEl = relatedMovies.map((movie) => (
     <MovieCard
       key={movie.id}
@@ -129,34 +134,28 @@ export default function MovieDetail() {
   return (
     <div className="movie-details-page" ref={topRef}>
       <div className="movie-main-details">
-        <img src={movie.image} />
+        <img src={movie.image} alt="Movie Poster" />
         <div className="movie-text-details">
           {isDropdownVisible && (
-              <div className="watchlist-dropdown">
-              <span
-                  className="movie-card-cancel-modal"
-                  onClick={() => setDropdownVisible(false)}
-              >
-                  X
+            <div className="watchlist-dropdown">
+              <span className="movie-card-cancel-modal" onClick={() => setDropdownVisible(false)}>
+                X
               </span>
               <div className="movie-card-modal">
-                  <div className="movie-card-modal-content">
+                <div className="movie-card-modal-content">
                   <h3>Select a watchlist</h3>
-                  <select
-                      value={selectedWatchlist}
-                      onChange={(e) => setSelectedWatchlist(e.target.value)}
-                  >
-                      <option value="">Select a watchlist</option>
-                      {watchlistItems.map((watchlist, i) => (
+                  <select value={selectedWatchlist} onChange={(e) => setSelectedWatchlist(e.target.value)}>
+                    <option value="">Select a watchlist</option>
+                    {watchlistItems.map((watchlist, i) => (
                       <option key={i} value={watchlist.name}>
-                          {watchlist.name}
+                        {watchlist.name}
                       </option>
-                      ))}
+                    ))}
                   </select>
                   <button onClick={addToWatchlist}>Add to Watchlist</button>
-                  </div>
+                </div>
               </div>
-              </div>
+            </div>
           )}
           <div className="movie-title-year">
             <h1>{movie.title}</h1>
@@ -189,3 +188,5 @@ export default function MovieDetail() {
     </div>
   );
 }
+
+export default MovieDetail

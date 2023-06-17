@@ -5,7 +5,7 @@ const baseUrl = "https://api.themoviedb.org/3/"
 const basePath ="https://image.tmdb.org/t/p/original"
 
 // Resquest api key fro dotenv
-const apiKey = "dad7f945b88447e0c503608ca998502b"
+const apiKey = import.meta.env.VITE_API_KEY
 
 // Reusable function for all movieList
 async function runFetch(path, str) {
