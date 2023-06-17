@@ -2,6 +2,7 @@ import  {useState} from "react"
 import Header from "./Header"
 import Modal from "./Modal"
 import { Outlet } from "react-router-dom"
+import Footer from "./Footer"
 
 export default function HomeLayout() {
     const [isOpen, setIsOpen] = useState(false)
@@ -23,7 +24,11 @@ export default function HomeLayout() {
                 <div className={`outlet-div ${isOpen && "hide"}`}>
                     <Outlet context={{setRefresh}}/>
                 </div>
-            </main>         
+            </main>  
+            <Footer 
+                isOpen={isOpen} 
+                setIsOpen={setIsOpen}
+            />       
         </div>
     )
 }
