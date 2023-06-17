@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import dummy from "../../assets/profile-dummy.png"
 import { convertBlobToDataURL } from "../../utils/profileUtils";
 
-const SignUpForm = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     nickname: "",
     profilePicture: null,
@@ -52,27 +52,11 @@ const SignUpForm = () => {
       // Send email verification
       await user.sendEmailVerification();
 
-      // Upload profile picture if selected
-      // let profilePictureUrl = "";
-      // if (profilePicture) {
-      //   // const storageRef = firebase.storage().ref();
-      //   const fileRef = storageRef.child(`profilePictures/${user.uid}`);
-      //   await fileRef.put(profilePicture);
-      //   profilePictureUrl = await fileRef.getDownloadURL();
-      // }
-
-      // Create user profile in Firestore
-      // await createUserProfileDocument(user, { nickname, profilePictureUrl });
-
         // Convert profile picture to URL if selected
         let profilePictureUrl = "";
         if (profilePicture) {
           profilePictureUrl = await convertBlobToDataURL(profilePicture)
         }
-      //   let profilePictureUrl = "";
-      // if (profilePicture) {
-      //   profilePictureUrl = await convertBlobToDataURL(profilePicture);
-      // }
 
         // Store profile picture URL and nickname in localStorage
         localStorage.setItem("user", JSON.stringify({
@@ -184,4 +168,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignUp;

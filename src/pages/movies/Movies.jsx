@@ -5,7 +5,7 @@ import {
   getNowPlayingMovies,
   getTopRatedMovies,
   getUpcomingMovies
-} from "../../../utils";
+} from "../../utils/movieUtils";
 import MovieCard from "../../components/MovieCard";
 
 // Loader function to fetch movie data
@@ -25,7 +25,7 @@ export async function loader() {
   };
 }
 
-export default function Movies() {
+const  Movies = () => {
   // Accessing the loader data using useLoaderData hook
   const {
     popularMovies,
@@ -94,3 +94,5 @@ export default function Movies() {
     </div>
   );
 }
+
+export default Movies

@@ -1,60 +1,65 @@
-/* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import awful from '../assets/awfulEmoji.png'
-import normal from '../assets/normalEmoji.png'
-import great from '../assets/greatEmoji.png'
-import ribbon from '../assets/ribbon.svg'
-import { currentUser } from '../utils/firebase'
+// Imports necessary methods and files
+import { useState, useEffect } from 'react' 
+import { Link, useNavigate } from 'react-router-dom' 
+import awful from '../assets/awfulEmoji.png' 
+import normal from '../assets/normalEmoji.png' 
+import great from '../assets/greatEmoji.png' 
+import ribbon from '../assets/ribbon.svg' 
+import { currentUser } from '../utils/firebase' 
 
-export default function MovieCard(props) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false)
-  const [selectedWatchlist, setSelectedWatchlist] = useState('')
+const MovieCard = ({id, name,image, year, rating, isWatchlist }) => { 
+  const [isDropdownVisible, setDropdownVisible] = useState(false) 
+  const [selectedWatchlist, setSelectedWatchlist] = useState('') 
   const [watchlistItems, setWatchlistItems] = useState([])
   const navigate = useNavigate()
   const user = currentUser()
 
-  useEffect(() => {
+  useEffect(() => { 
+    // Retrieves the watchlist items from local storage, or an empty array if there are no items.
     const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || []
-    setWatchlistItems(watchlist)
   }, [])
-
-  const {id, name,image, year, rating, isWatchlist } = props
-
-  async function openWatchlistSelect() {
-    if(!user) {
-      navigate("/login?message=You must log in first to perform this action !")
-      return
+  
+  // Show dropdow to seected watchlist to be used
+  async function openWatchlistSelect() { 
+    // Conditionally checks the value of user.
+    if(!user) { 
+      navigate("/login?message=You must log in first to perform this action !") 
+      return 
     }
 
-    if (watchlistItems.length === 0) {
-      alert('Create a watchlist first to add the movie.')
+    if (watchlistItems.length === 0) { 
+      alert('Create a watchlist first to add the movie.') 
     } else {
-      setDropdownVisible(true)
+      setDropdownVisible(true) 
     }
   }
 
-  function addToWatchlist() {
-    if (!selectedWatchlist) {
+  // Add the movie to the selected watchlist
+  function addToWatchlist() { 
+    // Checks if there is a value for selectedWatchlist.
+    if (!selectedWatchlist) { 
       alert('Please select a watchlist from the options')
-      return
+      return 
     }
   
+    // Searches watchlistItems array for a watchlist that matches selectedWatchlist name.
     const watchlist = watchlistItems.find((w) => w.name === selectedWatchlist)
-    if (!watchlist) {
+    if (!watchlist) { 
       alert('Invalid watchlist')
+      return 
+    }
+  
+    // Checks if the current movie exists in the watchlist.
+    const movieExists = watchlist.movies.some((movie) => movie.id === id) 
+    if (movieExists) { 
+      alert('Movie already exists in this watchlist.') 
+      setDropdownVisible(false) 
       return
     }
   
-    const movieExists = watchlist.movies.some((movie) => movie.id === id)
-    if (movieExists) {
-      alert('Movie already exists in this watchlist.')
-      setDropdownVisible(false)
-      return
-    }
-  
-    const updatedWatchlist = watchlistItems.map((w) => {
-      if (w.name === selectedWatchlist) {
+    // Loops over each item in the watchlistItems array and update the selected watchlist
+    const updatedWatchlist = watchlistItems.map((w) => { 
+      if (w.name === selectedWatchlist) { 
         return {
           ...w,
           movies: [
@@ -72,23 +77,24 @@ export default function MovieCard(props) {
       return w
     })
   
-    localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist))
-    setDropdownVisible(false)
-    alert(`Added movie to ${selectedWatchlist}`)
-    window.location.reload()
+    // Sets the local storage with the new updated watchlist.
+    localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist)) 
+    setDropdownVisible(false) 
+    alert(`Added movie to ${selectedWatchlist}`) 
+    window.location.reload() 
   }
 
   const emoji =
     rating <= 50 ? (
-      <img src={awful} alt="Awful Emoji" />
+      <img src={awful} alt="Awful Emoji" /> // Displayed when rating is less than or equal to 50.
     ) : rating > 50 && rating < 75 ? (
-      <img src={normal} alt="Normal Emoji" />
+      <img src={normal} alt="Normal Emoji" /> // Displayed when rating is between 50 and 75.
     ) : (
-      rating >= 75 && <img src={great} alt="Great Emoji" />
+      rating >= 75 && <img src={great} alt="Great Emoji" /> // Displayed when rating is greater than or equal to 75.
     )
 
   return (
-    <div className="movie-card">
+    <div className="movie-card"> 
       {!isWatchlist && (
         <img
           className="movie-ribbon"
@@ -139,3 +145,5 @@ export default function MovieCard(props) {
     </div>
   )
 }
+
+export default MovieCard

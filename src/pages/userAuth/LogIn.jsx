@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useNavigate, Link, useLoaderData } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 
+// Loader function to get the "message" query parameter from the URL
 export function loader({ request }) {
   return new URL(request.url).searchParams.get("message")
 }
 
-export default function LoginComponent() {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -82,3 +83,5 @@ export default function LoginComponent() {
     </div>
   );
 }
+
+export default Login

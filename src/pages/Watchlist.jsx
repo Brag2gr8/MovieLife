@@ -2,20 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
-export default function WatchList() {
+const Watchlist = () =>  {
   const [watchlist, setWatchlist] = useState(null);
   const { name: watchlistName } = useParams();
   const topRef = useRef();
 
   useEffect(() => {
+    // Retrieve the watchlist from local storage
     const existingWatchlist = localStorage.getItem("allWatchlist");
     const parsedWatchlist = JSON.parse(existingWatchlist);
 
+    // Find the watchlist that matches the specified name in the URL params
     const foundWatchlist = parsedWatchlist.find(
       (data) => data.name === watchlistName
     );
 
     if (foundWatchlist) {
+      // Set the watchlist state if it exists
       setWatchlist(foundWatchlist);
     } else {
       setWatchlist(null); // Set watchlist to null if it doesn't exist
@@ -27,6 +30,7 @@ export default function WatchList() {
   }, [watchlistName]);
 
   if (watchlist === null) {
+    // Render a message and a button to return to the homepage if the watchlist doesn't exist
     return (
       <div className="invalid-watchlist">
         <p>This Watchlist does not Exist 😢</p>
@@ -38,6 +42,7 @@ export default function WatchList() {
   }
 
   function getAverageRating(arr) {
+    // Calculate the average rating of the movies in the watchlist
     let totalRating = 0;
 
     arr.forEach((el) => {
@@ -49,6 +54,7 @@ export default function WatchList() {
 
   const watchlistEl =
     watchlist.movies.length > 0 ? (
+      // Render MovieCard components for each movie in the watchlist
       watchlist.movies.map((movie) => (
         <MovieCard
           key={movie.id}
@@ -61,6 +67,7 @@ export default function WatchList() {
         />
       ))
     ) : (
+      // Render a message and a button to return to the homepage if the watchlist is empty
       <div className="no-movie-watchlist">
         <p>🚫 No Movie has been added to this watchlist</p>
         <Link to="/">
@@ -104,3 +111,5 @@ export default function WatchList() {
     </div>
   );
 }
+
+export default Watchlist

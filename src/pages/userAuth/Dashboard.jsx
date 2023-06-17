@@ -15,6 +15,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Grab user from localstorage
     const parsedUser = JSON.parse(localStorage.getItem("user"));
     if (parsedUser) {
       setUserData(parsedUser)
@@ -50,6 +51,7 @@ const Dashboard = () => {
     setProfilePlaceholder(fileUrl);
   };
 
+  // Handle profile change
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     setIsUpdating(true)
@@ -57,9 +59,11 @@ const Dashboard = () => {
     let name = ""
     let pictureUrl = ""
 
+    // Set to initail is no changes
     if(!nickname) {
       name = userData.nickname
     }
+    // Set to initial is no changes
     if(!profilePicture) {
       pictureUrl = userData.profilePicture;
     }
@@ -80,21 +84,6 @@ const Dashboard = () => {
     setIsUpdating(false)
     window.location.reload()
   };
-
-  if (user && !user.emailVerified) {
-    return (
-      <div className="signup-page">
-        <h2>Email Not Verified</h2>
-        <p>Please verify your email before accessing the user dashboard.</p>
-        <button
-          className="create-watchlist-button logout-button"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className="signup-page dashboard">

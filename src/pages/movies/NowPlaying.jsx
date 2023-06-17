@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react"
 import { useLocation } from "react-router-dom"
-import { getNowPlayingMovies } from "../../../utils"
+import { getNowPlayingMovies } from "../../utils/movieUtils"
 import movieData from "../../../data"
 import MovieCard from "../../components/MovieCard"
 
-export default function NowPlaying() {
+const  NowPlaying = () => {
   const [page, setPage] = useState(1)
   const [allPages, setAllPages] = useState(5)
   const [movies, setMovies] = useState(movieData)
@@ -14,10 +14,13 @@ export default function NowPlaying() {
 
   useEffect(() => {
     async function loadMovies() {
+      //Grab movies from utils
       const {returnedMovies, totalPages} = await getNowPlayingMovies(page)
       setMovies(returnedMovies)
       setAllPages(totalPages)
     }
+
+    //Scroll to top at each page change
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -25,6 +28,7 @@ export default function NowPlaying() {
 
   }, [page, urlParam, location.search])
 
+  // Create movie  jsx elements
   const moviesEl = movies.map(movie => {
     return (
       <MovieCard
@@ -68,3 +72,5 @@ export default function NowPlaying() {
     </div>
   )
 }
+
+export default NowPlaying

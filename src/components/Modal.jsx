@@ -1,45 +1,46 @@
-/* eslint-disable react/prop-types */
-
 import SearchForm from "./SearchForm"
 import { NavLink, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react" // Importing react components that are needed.
 import { currentUser } from "../utils/firebase"
 import Profile from "./Profile"
 import mLogo from "../assets/mLogo.png"
 
-export default function Modal(props) {
+// This component is a Modal
+const Modal = ({isOpen, setIsOpen, refresh, setRefresh }) => {
     const user = currentUser()
-    const [allWatchlist, setAllWatchlist] = useState([])
-    const {isOpen, setIsOpen, refresh, setRefresh } = props
+    const [allWatchlist, setAllWatchlist] = useState([]) 
     const style = isOpen ? "show" : "none"
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate() 
+
+    // Styling for navigation link when active
     const activeStyle = {
         backgroundColor: "rgba(255, 255, 255, 0.1)",
     }
 
     useEffect(() => {
-        const existingWatchList = localStorage.getItem("allWatchlist")
+        // Get all watchlists from local storage
+        const existingWatchList = localStorage.getItem("allWatchlist") 
         const data = JSON.parse(existingWatchList)
 
-        if(data && user) {
+        // If user is logged in and there is existing data of watchlists, then set the state with the all existing watchlists.
+        if(data && user) { 
             setAllWatchlist(data)
         }
         
-    }, [props, refresh])
+    }, [isOpen, refresh])
 
-
-
+    // Deletes a watch list by ID
     function deleteWatchlist(id) {
         const confirmed = window.confirm('Are you sure you want to delete this watchlist?');
-      
-        if (confirmed) {
+
+        if (confirmed) { 
           const updatedWatchlist = allWatchlist.filter((watchlist) => watchlist.id !== id);
           setAllWatchlist(updatedWatchlist);
           localStorage.setItem('allWatchlist', JSON.stringify(updatedWatchlist));
         }
-      }
+    }
 
+    // Map through all the watch lists and create an HTML element for each
     const watchlistEl = allWatchlist.map( watchlist => {
         return (
             <div 
@@ -51,7 +52,7 @@ export default function Modal(props) {
                     style={({isActive}) => isActive ? activeStyle : null}
                     onClick={() => setIsOpen(false)}
                 >
-                    <img src={mLogo} />
+                    <img src={mLogo} alt="mLogo" />
                     <p>{watchlist.name}</p>
                 </NavLink>
                 <i 
@@ -62,14 +63,16 @@ export default function Modal(props) {
         )
     })
 
+    // Navigating user to create a new watchlist
     function CreateWatchList() {
-        navigate(`/create-watchlist`)
+        navigate(`/create-watchlist`) 
         setIsOpen(false)
         if(refresh) {
             setRefresh(prev => !prev)
         }
     }
 
+    // Render the Modal component
     return (
         <div className={`modal ${style}`} >
             <SearchForm 
@@ -125,3 +128,5 @@ export default function Modal(props) {
         </div>
     )
 }
+
+export default Modal;

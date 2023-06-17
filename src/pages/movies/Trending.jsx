@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react"
 import { useLocation } from "react-router-dom"
-import { getTrendingMovies } from "../../../utils"
+import { getTrendingMovies } from "../../utils/movieUtils"
 import movieData from "../../../data"
 import MovieCard from "../../components/MovieCard"
 
-export default function Trending() {
+const Trending = () => {
   const [page, setPage] = useState(1)
   const [allPages, setAllPages] = useState(5)
   const [movies, setMovies] = useState(movieData)
@@ -13,11 +13,14 @@ export default function Trending() {
   const topRef = useRef(null)
 
   useEffect(() => {
+    //Grab movies from utils
     async function loadMovies() {
       const {returnedMovies, totalPages} = await getTrendingMovies(page)
       setMovies(returnedMovies)
       setAllPages(totalPages)
     }
+
+    //Scroll to top at each page change
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -25,6 +28,7 @@ export default function Trending() {
 
   }, [page, urlParam, location.search])
 
+  // Create movie  jsx elements
   const moviesEl = movies.map(movie => {
     return (
       <MovieCard
@@ -68,3 +72,5 @@ export default function Trending() {
     </div>
   )
 }
+
+export default Trending

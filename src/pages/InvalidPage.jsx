@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import error from "../assets/404.png"
 
-export default function InvalidPage() {
+const InvalidPage = () => {
 
     return (
         <div className="invalid-page">
@@ -15,3 +15,4 @@ export default function InvalidPage() {
         </div>
     )
 }
+export default InvalidPage
