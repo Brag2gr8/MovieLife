@@ -13,7 +13,6 @@ export default function LoginComponent() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const message = useLoaderData()
-  console.log(message)
 
   const handleLogin = async (e) => {
     e.preventDefault();

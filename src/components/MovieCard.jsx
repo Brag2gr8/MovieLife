@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import awful from '../assets/awfulEmoji.png'
 import normal from '../assets/normalEmoji.png'
 import great from '../assets/greatEmoji.png'
 import ribbon from '../assets/ribbon.svg'
+import { currentUser } from '../utils/firebase'
 
 export default function MovieCard(props) {
   const [isDropdownVisible, setDropdownVisible] = useState(false)
   const [selectedWatchlist, setSelectedWatchlist] = useState('')
   const [watchlistItems, setWatchlistItems] = useState([])
+  const navigate = useNavigate()
+  const user = currentUser()
 
   useEffect(() => {
     const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || []
@@ -18,7 +21,12 @@ export default function MovieCard(props) {
 
   const {id, name,image, year, rating, isWatchlist } = props
 
-  function openWatchlistSelect() {
+  async function openWatchlistSelect() {
+    if(!user) {
+      navigate("/login?message=You must log in first to perform this action !")
+      return
+    }
+
     if (watchlistItems.length === 0) {
       alert('Create a watchlist first to add the movie.')
     } else {
@@ -81,13 +89,14 @@ export default function MovieCard(props) {
 
   return (
     <div className="movie-card">
-      {!isWatchlist && <img
+      {!isWatchlist && (
+        <img
           className="movie-ribbon"
           src={ribbon}
           onClick={openWatchlistSelect}
           alt="Ribbon"
         />
-      }
+      )}
       <Link to={`/movies/all/${id}`}>
         <img src={image} className="movie-card-image" alt="Movie" />
       </Link>

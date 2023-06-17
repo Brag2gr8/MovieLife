@@ -4,14 +4,16 @@ import { useLoaderData } from "react-router-dom";
 import { getMovieDetails, getTrailer, getCast, getRelatedMovies } from "../../../utils";
 import CastCard from "../../components/CastCard";
 import MovieCard from "../../components/MovieCard";
+import { requireAuth } from "../../utils/authUtils";
 
-export async function loader({ params }) {
+export async function loader({ request, params }) {
   const { id } = params;
 
   const movie = await getMovieDetails(id);
   const cast = await getCast(id);
   const trailer = await getTrailer(id);
   const relatedMovies = await getRelatedMovies(id);
+  await requireAuth(request)
 
   return { movie, cast, trailer, relatedMovies };
 }

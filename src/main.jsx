@@ -45,12 +45,24 @@ const movieLife = createBrowserRouter(createRoutesFromElements(
       element={<History />}
       loader={async ({ request }) => await requireAuth(request)}
     />
-    <Route path="create-watchList" element={<CreateWatchlist />} />
+    <Route 
+      path="create-watchList" 
+      element={<CreateWatchlist />} 
+      loader={async ({ request }) => await requireAuth(request)}
+    />
     <Route path="edit-watchList" element={<EditWatchlist />} />
-    <Route path="watchlist/:name" element={<Watchlist />} />
+    <Route 
+      path="watchlist/:name" 
+      element={<Watchlist />} 
+      loader={async ({ request }) => await requireAuth(request)}
+    />
     <Route path="login" element={<Login />}  loader={loginLoader} />
     <Route path="signup" element={<SignUp />}/>
-    <Route path="dashboard" element={<Dashboard />}/>
+    <Route 
+      path="dashboard" 
+      element={<Dashboard />}
+      loader={async ({ request }) => await requireAuth(request)}
+    />
     <Route path="*" element={<InvalidPage />} />
   </Route>
 ));

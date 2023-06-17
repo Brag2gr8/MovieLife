@@ -70,12 +70,14 @@ export default function Home() {
     
     return (
         <div className="home">
-            <section className="home-section">
-                <h2>Welcome to <span>MovieLife</span></h2>
-                <h4>Browse movies, add them to watchlists and share them with friends.</h4>
-                <h4>Just click the <img src={ribbon}/>  to add a movie to watchlists, the poster to see more details or <img src={whiteCheck}/> to mark the movie as watched.</h4>
-            </section>
-            <SearchForm />
+            <div className="home-top-section">
+                <section className="home-details">
+                    <h2>Welcome to <span>MovieLife</span></h2>
+                    <h4>Browse movies, add them to watchlists and share them with friends.</h4>
+                    <h4>Just click the <img src={ribbon}/>  to add a movie to watchlists or the poster to see more details.</h4>
+                </section>
+                <SearchForm />
+            </div>
             {renderMovie(trendingMovies, "TRENDING", "trending")}
             <hr/>
             {renderMovie(popularMovies, "POPULAR", "popular")}

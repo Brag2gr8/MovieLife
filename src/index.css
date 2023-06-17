@@ -99,7 +99,7 @@ transform: rotate(90deg);
   border: 3px solid var(--red)
 }
 
-.home-section {
+.home-details {
   background: var(--line-color);
   border: 1px solid var(--red);
   border-radius: 8px;
@@ -109,10 +109,10 @@ transform: rotate(90deg);
   padding: 20px 7px 60px;
 }
 
-.home-section span { color: var(--red) }
-.home-section h4 { line-height: 25px}
+.home-details span { color: var(--red) }
+.home-details h4 { line-height: 25px}
 
-.home-section img {
+.home-details img {
   width: 16px;
   margin: 0 5px
 }
@@ -792,6 +792,7 @@ transform: rotate(90deg);
   color: greenyellow;
   width: fit-content;
   margin: 20px auto;
+  text-align: center;
 }
 
 .below-alternate-signup {
@@ -915,6 +916,9 @@ transform: rotate(90deg);
       grid-template-rows:  100vh;
   }
 
+  .home {padding: 0 50px}
+  .home-top-section {padding: 30px 200px;}
+
   .invalid-page {padding: 10% 20%}
 
   .modal {display: block;}
@@ -946,6 +950,7 @@ transform: rotate(90deg);
   .watchlist-items {
     height: 25%;
   }
+
   
   .watchlist-sub-details > div { width: fit-content;}
   .signup-page, .login-page {padding: 50px 250px}
