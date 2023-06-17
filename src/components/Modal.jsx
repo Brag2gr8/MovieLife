@@ -102,12 +102,12 @@ export default function Modal(props) {
                 </NavLink>
                 { !user && (
                     <NavLink 
-                        to="/login" 
+                        to="/signup" 
                         style={({isActive}) => isActive ? activeStyle : null}
                         onClick={() => setIsOpen(false)}
                     >
                         <i className="fa-solid fa-user"></i>
-                        <p>Login</p>
+                        <p>Sign Up</p>
                     </NavLink>
                 )}
             </nav>
