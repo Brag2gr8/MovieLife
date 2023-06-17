@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { nanoid } from "nanoid";
 
-export default function CreateWatchList() {
+const CreateWatchList = () => {
   // State to hold the current watchlist data
   const [currentWatchlist, setCurrentWatchlist] = useState([]);
 
@@ -97,3 +97,5 @@ export default function CreateWatchList() {
     </div>
   );
 }
+
+export default CreateWatchList 

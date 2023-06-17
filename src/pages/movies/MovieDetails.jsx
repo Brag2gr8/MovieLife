@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect, useRef } from "react";
 import { useLoaderData } from "react-router-dom";
-import { getMovieDetails, getTrailer, getCast, getRelatedMovies } from "../../../utils";
+import { getMovieDetails, getTrailer, getCast, getRelatedMovies } from "../../utils/movieUtils";
 import CastCard from "../../components/CastCard";
 import MovieCard from "../../components/MovieCard";
 import { requireAuth } from "../../utils/authUtils";
@@ -13,12 +13,14 @@ export async function loader({ request, params }) {
   const cast = await getCast(id);
   const trailer = await getTrailer(id);
   const relatedMovies = await getRelatedMovies(id);
+
+  // check if user is logged in
   await requireAuth(request)
 
   return { movie, cast, trailer, relatedMovies };
 }
 
-export default function MovieDetail() {
+const  MovieDetails = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedWatchlist, setSelectedWatchlist] = useState("");
   const [watchlistItems, setWatchlistItems] = useState([]);
@@ -26,6 +28,7 @@ export default function MovieDetail() {
   const topRef = useRef();
 
   useEffect(() => {
+    // Grab all watchlist from local storage
     const watchlist = JSON.parse(localStorage.getItem("allWatchlist")) || [];
     setWatchlistItems(watchlist);
 
@@ -36,13 +39,15 @@ export default function MovieDetail() {
       history.unshift(movie);
       localStorage.setItem("history", JSON.stringify(history));
     }
-
+    
+    // Scroll to top of the page on every movie change
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [movie]);
 
-  function openWatchlistSelect() {
+ // Show dropdow to seected watchlist to be used
+ async function openWatchlistSelect() { 
     if (watchlistItems.length === 0) {
       alert("Create a watchlist first to add the movie.");
     } else {
@@ -50,18 +55,22 @@ export default function MovieDetail() {
     }
   }
 
-  function addToWatchlist() {
+  // Add the movie to the selected watchlist
+  function addToWatchlist() { 
+    // Checks if there is a value for selectedWatchlist.
     if (!selectedWatchlist) {
       alert("Please select a watchlist from the options");
       return;
     }
   
+    // Searches watchlistItems array for a watchlist that matches selectedWatchlist name.
     const watchlist = watchlistItems.find((w) => w.name === selectedWatchlist);
     if (!watchlist) {
       alert("Invalid watchlist");
       return;
     }
   
+    // Checks if the current movie exists in the watchlist.
     const movieExists = watchlist.movies.some((movieItem) => movieItem.id === movie.id);
     if (movieExists) {
       alert("Movie already exists in this watchlist.");
@@ -69,6 +78,7 @@ export default function MovieDetail() {
       return;
     }
   
+    // Loops over each item in the watchlistItems array and update the selected watchlist
     const updatedWatchlist = watchlistItems.map((w) => {
       if (w.name === selectedWatchlist) {
         return {
@@ -88,6 +98,7 @@ export default function MovieDetail() {
       return w;
     });
   
+    // Sets the local storage with the new updated watchlist.
     localStorage.setItem("allWatchlist", JSON.stringify(updatedWatchlist));
     setDropdownVisible(false);
     alert(`Added movie to ${selectedWatchlist}`);
@@ -95,6 +106,7 @@ export default function MovieDetail() {
   }
   
 
+  // Create element for casts
   const castEl = cast.map((el) => (
     <CastCard
       key={el.id}
@@ -104,6 +116,7 @@ export default function MovieDetail() {
     />
   ));
 
+   // Create element for trailers
   const trailerEl = trailer.map((el, i) => (
     <div key={i}>
       <pre>{el.name}</pre>
@@ -117,6 +130,7 @@ export default function MovieDetail() {
     </div>
   ));
 
+   // Create element for related movies
   const relatedMoviesEl = relatedMovies.map((movie) => (
     <MovieCard
       key={movie.id}
@@ -191,3 +205,5 @@ export default function MovieDetail() {
     </div>
   );
 }
+
+export default MovieDetails

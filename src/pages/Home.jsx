@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 // import {useState, useEffect} from "react"
 import { Link, useLoaderData } from "react-router-dom"
 // import { useOutletContext } from "react-router-dom"
@@ -13,9 +12,10 @@ import {
     getNowPlayingMovies,
     getTopRatedMovies,
     getUpcomingMovies
-} from "../../utils"
+} from "../utils/movieUtils"
 
 export async function loader() {
+    // Fetch data for different movie categories using utility functions
     const {returnedMovies: popularMovies} = await getPopularMovies()
     const {returnedMovies: trendingMovies} = await getTrendingMovies()
     const {returnedMovies: nowPlayingMovies} = await getNowPlayingMovies()
@@ -31,8 +31,8 @@ export async function loader() {
     }
 }
 
-export default function Home() {
-
+const Home = () => {
+    // Retrieve the movie data from the loader hook
     const {
         popularMovies, 
         trendingMovies, 
@@ -42,6 +42,7 @@ export default function Home() {
     } = useLoaderData()
     
     function renderMovie(movieType, movieHeader, moviePath) {
+        // Render MovieCard components for each movie in the specified category
         const movieTray = movieType.slice(0, 6).map(movie => {
             return <MovieCard
                 key={movie.id}
@@ -62,7 +63,7 @@ export default function Home() {
                     </Link>
                 </div>
                 <section className="movie-tray">
-                {movieTray}
+                    {movieTray}
                 </section>
             </>
         )
@@ -90,3 +91,5 @@ export default function Home() {
         </div>
     )
 }
+
+export default Home

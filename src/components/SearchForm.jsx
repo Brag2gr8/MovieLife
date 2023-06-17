@@ -1,7 +1,7 @@
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 
-export default function Search(props) {
+const Search = ({setIsOpen}) => {
     const [title, setTitle] = useState("")
     const navigate = useNavigate()
     
@@ -10,8 +10,7 @@ export default function Search(props) {
         e.preventDefault();
         navigate(`search?title=${title}`)
         setTitle('')
-        // eslint-disable-next-line react/prop-types
-        props.setIsOpen(false)
+        setIsOpen(false)
     }
     
     function handleChange(e) {
@@ -32,3 +31,5 @@ export default function Search(props) {
         </form>
     )
 }
+
+export default Search

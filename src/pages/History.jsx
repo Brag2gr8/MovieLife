@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import MovieCard from "../components/MovieCard"
 
-export default function History() {
+const History = () => {
     const [history, setHistory] = useState([])
 
     useEffect(() => {
@@ -47,3 +47,5 @@ export default function History() {
        </div>
     )
 }
+
+export default History

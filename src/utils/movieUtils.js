@@ -176,25 +176,11 @@ function processMovie(obj) {
 // Process cast to suit castCard component
 function processCast(obj) {
     const {id, name, character, profile_path} = obj
-    let image
-    let role 
-    
-    if (!profile_path) {
-        image = "https://via.placeholder.com/300x450.png?text=No+Profile+Available"
-    } else {image =`${basePath}${profile_path}`}
-    
-    if (character) {
-        role = character
-    } else { role = "unknown role"}
 
     return {
         id: id,
         name: name,
-        character: role,
-        image: image,
+        character: character,
+        image: `${basePath}${profile_path}`,
     }
 }
-
-// export function addToWatchlist() {
-
-// }

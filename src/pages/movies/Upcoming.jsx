@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react"
 import { useLocation } from "react-router-dom"
-import { getUpcomingMovies } from "../../../utils"
+import { getUpcomingMovies } from "../../utils/movieUtils"
 import movieData from "../../../data"
 import MovieCard from "../../components/MovieCard"
 
-export default function Upcoming() {
+const Upcoming = () => {
   const [page, setPage] = useState(1)
   const [allPages, setAllPages] = useState(5)
   const [movies, setMovies] = useState(movieData)
@@ -13,11 +13,14 @@ export default function Upcoming() {
   const topRef = useRef(null)
 
   useEffect(() => {
+    //Grab movies from utils
     async function loadMovies() {
       const {returnedMovies, totalPages} = await getUpcomingMovies(page)
       setMovies(returnedMovies)
       setAllPages(totalPages)
     }
+
+    //Scroll to top at each page change
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -25,6 +28,7 @@ export default function Upcoming() {
 
   }, [page, urlParam, location.search])
 
+  // Create movie  jsx elements
   const moviesEl = movies.map(movie => {
     return (
       <MovieCard
@@ -68,3 +72,5 @@ export default function Upcoming() {
     </div>
   )
 }
+
+export default Upcoming

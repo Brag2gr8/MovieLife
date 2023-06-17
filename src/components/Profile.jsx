@@ -9,6 +9,7 @@ export default function Profile(props) {
   const [picture, setPicture] = useState(null);
 
   useEffect(() => {
+    // Obtain user from local storage
     const userData = JSON.parse(localStorage.getItem("user"));
     if (userData) {
       setUsername(userData.nickname);
@@ -16,10 +17,12 @@ export default function Profile(props) {
     }
   }, []);
 
+   // Close Modal to reveal page on mobile
   function closeModal() {
     props.setIsOpen(false)
   }
 
+  // Logout the user and close the modal
   async function handleLogout() {
     await logout();
     closeModal()
