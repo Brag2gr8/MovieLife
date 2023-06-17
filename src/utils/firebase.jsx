@@ -4,14 +4,14 @@ import "firebase/compat/firestore";
 
 // Your Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCFas_JsvEvU1UdskyFKu7_N_UgYKJtc4Y",
-    authDomain: "movielife-a9293.firebaseapp.com",
-    projectId: "movielife-a9293",
-    storageBucket: "movielife-a9293.appspot.com",
-    messagingSenderId: "989181542890",
-    appId: "1:989181542890:web:fbd8d5f81d10d5ddf8b293",
-    measurementId: "G-G6WTQ0GXQ7"
-  };
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -24,8 +24,6 @@ export const currentUser = () => {
   const user = auth.currentUser;
   return user
 };
-
-currentUser()
 
 export const signup = (email, password) => {
   return auth.createUserWithEmailAndPassword(email, password);
