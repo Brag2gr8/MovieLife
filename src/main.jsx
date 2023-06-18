@@ -21,6 +21,7 @@ import CreateWatchlist from "./pages/CreateWatchlist";
 import EditWatchlist from "./pages/EditWatchlist";
 import Watchlist from "./pages/Watchlist";
 import InvalidPage from "./pages/InvalidPage";
+import Error from "./pages/Error";
 import Login, { loader as loginLoader } from "./pages/userAuth/LogIn"
 import SignUp from "./pages/userAuth/SignUp"
 // import Dashboard from "./pages/userAuth/Dashboard"
@@ -28,7 +29,7 @@ import { requireAuth } from './utils/authUtils';
 
 const movieLife = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<HomeLayout />} >
-    <Route index element={<Home />} loader={homeLoader} />
+    <Route index element={<Home />} loader={homeLoader}  errorElement={Error}/>
     <Route path="movies" element={<Movies />} loader={moviesLoader} />
     <Route path="movies/trending" element={<Trending />} />
     <Route path="movies/popular" element={<Popular />} />

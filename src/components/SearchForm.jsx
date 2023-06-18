@@ -10,7 +10,9 @@ const Search = ({setIsOpen}) => {
         e.preventDefault();
         navigate(`search?title=${title}`)
         setTitle('')
-        setIsOpen(false)
+        if(setIsOpen) {
+            setIsOpen(false)
+        }
     }
     
     function handleChange(e) {

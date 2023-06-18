@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { useNavigate, Link, useLoaderData } from "react-router-dom";
-import { auth } from "../../utils/firebase";
+import { useNavigate, Link, useLoaderData, redirect } from "react-router-dom";
+import { auth, currentUser } from "../../utils/firebase";
 
 // Loader function to get the "message" query parameter from the URL
 export function loader({ request }) {
+  const user = currentUser()
+  console.log(user)
+  if(user) {
+    alert("you are already logged in")
+    throw new redirect("/")
+  }
   return new URL(request.url).searchParams.get("message")
 }
 

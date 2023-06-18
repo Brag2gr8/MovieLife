@@ -30,7 +30,7 @@ const HomeLayout = () => {
                 />
                 {/* Rendering the router's `Outlet` component and `Footer` component */}
                 <div className={`outlet-div ${isOpen && "hide"}`}>
-                    <Outlet context={{setRefresh}}/>
+                    <Outlet context={{setRefresh, setIsOpen}}/>
                     <Footer
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}

@@ -1,9 +1,5 @@
-// import {useState, useEffect} from "react"
 import { Link, useLoaderData } from "react-router-dom"
-// import { useOutletContext } from "react-router-dom"
 import ribbon from "../assets/ribbon.svg"
-import whiteCheck from "../assets/white-check.png"
-// import movieData from "../../data"
 import MovieCard from "../components/MovieCard"
 import SearchForm from "../components/SearchForm"
 import {
@@ -77,7 +73,7 @@ const Home = () => {
                     <h4>Browse movies, add them to watchlists and share them with friends.</h4>
                     <h4>Just click the <img src={ribbon}/>  to add a movie to watchlists or the poster to see more details.</h4>
                 </section>
-                <SearchForm />
+                <SearchForm/>
             </div>
             {renderMovie(trendingMovies, "TRENDING", "trending")}
             <hr/>
