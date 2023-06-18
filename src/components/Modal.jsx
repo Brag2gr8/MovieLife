@@ -103,6 +103,14 @@ const Modal = ({isOpen, setIsOpen, refresh, setRefresh }) => {
                     <i className="fa-solid fa-clock-rotate-left"></i>
                     <p>History</p>
                 </NavLink>
+                <NavLink 
+                    to="/about" 
+                    style={({isActive}) => isActive ? activeStyle : null}
+                    onClick={() => setIsOpen(false)}
+                >
+                    <i className="fa-solid fa-book"></i>
+                    <p>About</p>
+                </NavLink>
                 { !user && (
                     <NavLink 
                         to="/signup" 

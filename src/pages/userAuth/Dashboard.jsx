@@ -24,6 +24,8 @@ const Dashboard = () => {
 
   }, []);
 
+  // console.log(profilePlaceholder)
+
   const handleLogout = async () => {
     try {
       await logout();

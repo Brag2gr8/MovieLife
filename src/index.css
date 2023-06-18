@@ -1,3 +1,9 @@
+:root {
+  --red: #F33F3F;
+  --background-color: #191919;
+  --writing-color: #E1E1E1;
+  --line-color: rgba(217, 217, 217, 0.3);
+}
 * {
   box-sizing: border-box;
   padding: 0;
@@ -7,14 +13,9 @@
 
 html , body {
   font-family: 'Lato', sans-serif;
+  background: var(--background-color);
 }
 
-:root {
-  --red: #F33F3F;
-  --backgroun-color: #191919;
-  --writing-color: #E1E1E1;
-  --line-color: rgba(217, 217, 217, 0.3);
-}
 
 h2, h4 {font-weight: 400}
 button {cursor: pointer}
@@ -41,9 +42,7 @@ a {
 }
 
 /**************** HOME  *****************/
-
 .home-layout {
-  background: var(--backgroun-color);
   color: var(--writing-color);
 }
 
@@ -85,13 +84,16 @@ transform: rotate(90deg);
 }
 
 .outlet-div {
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
   overflow: auto;
 }
 
 .home {
   margin: 0;
-  background: rgba(255, 255, 255, 0.1);
   padding: 24px 17px;
 }
 
@@ -259,17 +261,17 @@ transform: rotate(90deg);
 
   to {
     background: var(--red);
-    color: var(--backgroun-color);
+    color: var(--background-color);
 }
 }
 
 .movie-card-cancel-modal:hover {
   background: var(--red);
-  color: var(--backgroun-color);
+  color: var(--background-color);
 }
 
 .movie-card-modal {
-  background-color: var(--backgroun-color);
+  background-color: var(--background-color);
   padding: 20px;
   border-radius: 5px;
   max-width: 400px;
@@ -396,7 +398,7 @@ transform: rotate(90deg);
 
 .movies-list-container > a:hover {
   background: var(--red);
-  color: var(--backgroun-color);
+  color: var(--background-color);
   transform: scale(1.2);
 }
 
@@ -774,7 +776,7 @@ transform: rotate(90deg);
 /***  AUTHENTICATION  ***/
 
 .signup-page{
-  padding: 0 100px 50px
+  padding: 0 80px 50px
 }
 
 .login-page {
@@ -889,25 +891,60 @@ transform: rotate(90deg);
   font-weight: 700;
 }
 
+/***   ABOUT   ***/
+
+.about-page {
+  padding: 30px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  line-height: 25px
+}
+
+.about-page  h2,
+.about-page  h3 {
+  color: var(--red);
+  margin-bottom: 10px;
+}
+.about-page  h2 {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+.about-page > section >  p {margin-bottom: 10px;}
+
+/***  FOOTER  ***/
+
 footer {
-  text-align: center;
+  background: var(--background-color);
   padding: 20px 0;
   display: flex;
   flex-direction: column;
-  gap:10px
+  align-items: center;
+  gap: 10px;
 }
+
+.tmbd-logo {
+  width: 50px;
+  margin-to: 20px;
+}
+.tmbd-logo:hover {transform: scale(1.1);}
 
 .social-icons-container {
   display: flex;
   justify-content: center;
-  gap: 15px
+  gap: 15px;
+  margin: 50px 0;
 }
 
-.social-icons-container > a:hover {transform: scale(1.5);}
+.social-icons-container > a > i {font-size: 20px;}
+i:hover {transform: scale(1.5);}
 .fa-twitter:hover {color: #00acee;}
 .fa-linkedin:hover {color: #0072b1 ;}
 .fa-github:hover {color: #6e5494 ;}
-.fa-envelope:hover {color: #f2a60c ;}
+.fa-envelope:hover {background: white;color: #f26 ;}
+
+.theDev {color: var(--red);}
+.theDev {transform: scale(1.1);}
 
 @keyframes reveal {
   0% {
@@ -931,18 +968,17 @@ footer {
 
 @media (min-width: 750px) {
   main {
-      display: grid;
-      grid-template-columns: 1fr 2.5fr;
-      grid-template-rows:  100vh;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    grid-template-rows:  100vh;
   }
 
-  .home {padding: 0 50px}
+  .home {padding: 0 50px 30px}
   .home-top-section {padding: 30px 10%;}
 
   .invalid-page {padding: 10% 20%}
 
   .modal {display: block;}
-  .outlet-div {display: block}
   .icon {display: none;}
 
   main > div {
@@ -973,6 +1009,6 @@ footer {
 
   
   .watchlist-sub-details > div { width: fit-content;}
-  .signup-page, .login-page {padding: 50px 250px}
+  .signup-page, .login-page {padding: 50px 20%}
 
 }
