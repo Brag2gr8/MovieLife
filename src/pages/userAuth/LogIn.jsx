@@ -32,7 +32,7 @@ const Login = () => {
 
       setLoading(false);
       alert("Successfully logged in");
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       setError(error.message);
       setLoading(false);

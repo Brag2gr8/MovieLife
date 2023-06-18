@@ -87,6 +87,7 @@ transform: rotate(90deg);
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
+  gap:30px;
   justify-content: space-between;
   height: 100vh;
   overflow: auto;
@@ -388,7 +389,7 @@ transform: rotate(90deg);
 }
 
 .movies-list-container > a {
-  background: var(--line-color);
+  background: var(--background-color);
   color: var(--writing-color);
   font-size: 20px;
   text-align: center;
@@ -574,11 +575,13 @@ transform: rotate(90deg);
 /*** WATCHLIST ***/
 
 .watchlist-items {
+  background: rgba(255, 255, 255, 0.1);
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  height: 30%;
+  height: 160px;
   overflow-y: auto;
+  border-radius: 6px;
 }
 
 
@@ -828,28 +831,6 @@ transform: rotate(90deg);
   background: transparent;
 }
 
-.account-picture {
-  width: 100px;
-  height: 100px;
-  margin: 20px auto;
-  border-radius: 50%;
-}
-
-.custom-file-input {
-  display: none; /* Hide the default file input button */
-}
-
-.custom-file-label {
-  text-align: center;
-  cursor: pointer;
-}
-
-.custom-file-label:hover {
-  color: var(--red);
-  transform: scale(1.1);
-}
-
-
 .loading {
   margin: 150px auto;
 }
@@ -886,9 +867,9 @@ transform: rotate(90deg);
   background: var(--writing-color);
   padding: 5px;
   border-radius: 6px;
-  font-size: 10px;
   color: var(--red);
   font-weight: 700;
+  border: none;
 }
 
 /***   ABOUT   ***/
@@ -925,7 +906,7 @@ footer {
 
 .tmbd-logo {
   width: 50px;
-  margin-to: 20px;
+  margin-top: 20px;
 }
 .tmbd-logo:hover {transform: scale(1.1);}
 
@@ -933,15 +914,15 @@ footer {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin: 50px 0;
+  margin: 30px 0;
 }
 
-.social-icons-container > a > i {font-size: 20px;}
-i:hover {transform: scale(1.5);}
+.social-icons-container > a > i {font-size: 30px;}
+i:hover {transform: scale(1.2);}
 .fa-twitter:hover {color: #00acee;}
 .fa-linkedin:hover {color: #0072b1 ;}
 .fa-github:hover {color: #6e5494 ;}
-.fa-envelope:hover {background: white;color: #f26 ;}
+.fa-envelope:hover {color: red ;}
 
 .theDev {color: var(--red);}
 .theDev {transform: scale(1.1);}

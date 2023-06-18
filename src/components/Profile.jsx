@@ -5,15 +5,12 @@ import { currentUser, logout } from "../utils/firebase";
 
 export default function Profile(props) {
   const user = currentUser();
-  const [username, setUsername] = useState(null);
-  const [picture, setPicture] = useState(null);
-
+  const [name, setName] = useState("");
   useEffect(() => {
     // Obtain user from local storage
-    const userData = JSON.parse(localStorage.getItem("user"));
-    if (userData) {
-      setUsername(userData.nickname);
-      setPicture(userData.profilePicture);
+    const nickname = JSON.parse(localStorage.getItem("nickname"));
+    if (nickname) {
+      setName(nickname);
     }
   }, []);
 
@@ -30,36 +27,26 @@ export default function Profile(props) {
 
   return (
     <div className="modal-profile" >
+      <div
+        className="guest"
+      >
+        <img src={dummy} alt="Profile Picture" />
+        <p>{name || "Guest"}</p>
+      </div>
     {user ? (
-      <>
-        <Link
-          to="/dashboard"
-          className="guest"
-          onClick={closeModal}
-        >
-          <img src={picture || dummy} alt="Profile Picture" />
-          <p>{username || "Guest"}</p>
-        </Link>
-        <button 
-          className="little-logout-button"
-          onClick={handleLogout}
-        >
-          Log out
-        </button>
-      </>
+      <button 
+        className="little-logout-button"
+        onClick={handleLogout}
+      >
+        Log out
+      </button>
     ) : (
-      <>
-        <div className="guest">
-          <img src={dummy} alt="Profile Picture" />
-          <p>{"Guest"}</p>
-        </div>
-        <button 
-          className="little-logout-button"
-          onClick={closeModal}
-        >
-          <Link to="/login">Log in</Link>
-        </button>
-      </>
+      <button 
+        className="little-logout-button"
+        onClick={closeModal}
+      >
+        <Link to="/login">Log in</Link>
+      </button>
     )}
   </div>
   )
