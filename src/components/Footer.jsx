@@ -1,14 +1,24 @@
-// import { Link } from "react-router-dom"
+const Footer = () => {
 
-const Footer = ({ isOpen, setIsOpen }) => (
-    <footer>
-            <p>Made with ❤️ form Nigeria</p>
-            <div className="social-icons">
-                <i className="fa-brands fa-twitter"></i>
-                <i className="fa-brands fa-linkedin"></i>
-                <i className="fa-brands fa-github"></i>
-                <i className="fa-solid fa-envelope"></i>
+    return(
+        <footer>
+            <p>Made with ❤️ by Bragg</p>
+            <div className="social-icons-container">
+                <a href="twitter.com/bragthefirst" target="_blank">
+                    <i className="fa-brands fa-twitter"></i>
+                </a>
+                <a href="linkedin.com/in/brag2" target="_blank">
+                    <i className="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="github.com/brag2gr8" target="_blank">
+                    <i className="fa-brands fa-github"></i>
+                </a>
+                <a href="mailto:brag2gr8@gmail.com" target="_blank">
+                    <i className="fa-solid fa-envelope"></i>
+                </a>
             </div>
         </footer>
-)
+    )
+} 
+
 export default Footer 

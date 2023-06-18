@@ -889,6 +889,26 @@ transform: rotate(90deg);
   font-weight: 700;
 }
 
+footer {
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap:10px
+}
+
+.social-icons-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px
+}
+
+.social-icons-container > a:hover {transform: scale(1.5);}
+.fa-twitter:hover {color: #00acee;}
+.fa-linkedin:hover {color: #0072b1 ;}
+.fa-github:hover {color: #6e5494 ;}
+.fa-envelope:hover {color: #f2a60c ;}
+
 @keyframes reveal {
   0% {
     width: 0;
@@ -917,7 +937,7 @@ transform: rotate(90deg);
   }
 
   .home {padding: 0 50px}
-  .home-top-section {padding: 30px 200px;}
+  .home-top-section {padding: 30px 10%;}
 
   .invalid-page {padding: 10% 20%}
 
