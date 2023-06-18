@@ -39,7 +39,7 @@ const SignUp = () => {
       await user.sendEmailVerification();
 
         // Store nickname in localStorage
-        localStorage.setItem("nickname", JSON.stringify({nickname}));
+        localStorage.setItem("nickname", JSON.stringify(nickname));
 
       // Reset form data
       setFormData({
