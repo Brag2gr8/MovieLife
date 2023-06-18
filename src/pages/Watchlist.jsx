@@ -78,7 +78,6 @@ const Watchlist = () =>  {
 
   return (
     <div ref={topRef} className="watchlist-page">
-      <>
         <div className="watchlist-title">
           <h1>{watchlist.name}</h1>
           <Link to={`/edit-watchlist?name=${watchlistName}`}>
@@ -107,7 +106,6 @@ const Watchlist = () =>  {
           <h2>Movies in this Watchlist</h2>
           <div className="movie-tray">{watchlistEl}</div>
         </div>
-      </>
     </div>
   );
 }

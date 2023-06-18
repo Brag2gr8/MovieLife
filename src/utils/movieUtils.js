@@ -18,15 +18,19 @@ async function runFetch(path, str) {
     
     const url = `${baseUrl}${path}?page=${page}&api_key=${apiKey}`
     
-    //get movieList  from api
-    const res = await fetch(url)
-    const data = await res.json()
-    const returnedMovies = data.results.map(movie => {
-        return processMovie(movie)
-    })
-    const totalPages = data.total_pages
+    //get movieList from api
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+        const returnedMovies = data.results.map(movie => {
+            return processMovie(movie)
+        })
+        const totalPages = data.total_pages
 
-    return {returnedMovies, totalPages}
+        return {returnedMovies, totalPages}
+    } catch(err) {
+        console.log(err)
+    }
 }
 
 //Get search result movies from api
@@ -149,16 +153,6 @@ export async function getTrailer(id) {
 // process movie to suit movieCard component
 function processMovie(obj) {
         const {id, title, poster_path, release_date, vote_average} = obj
-        let poster
-        let date
-        
-        if (!poster_path) {
-            poster = "https://via.placeholder.com/300x450.png?text=No+Poster+Available"
-        } else {poster = `${basePath}${poster_path}`}
-        
-        if (release_date === "") {
-            date = "No date"
-        } else { date = release_date.split("-")[0]}
         
         const voteAverage = vote_average === 0 ? "0" 
             : (Number.isInteger(vote_average) && vote_average > 0) ? `${vote_average}0`
@@ -167,8 +161,8 @@ function processMovie(obj) {
         return {
             id: id,
             name: title,
-            image: poster,
-            year: date,
+            image: `${basePath}${poster_path}`,
+            year: release_date.split("-")[0],
             rating: voteAverage
         }
 }

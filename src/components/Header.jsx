@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
+import PropTypes from "prop-types";
 
 const Header = ({isOpen, setIsOpen}) => {
     const icon = isOpen ? 
     <i className="fa-solid fa-xmark cancel" onClick={() => setIsOpen(false)}></i>
-        : <i className="fa-solid fa-bars" onClick={() => setIsOpen(true)}></i>
+        : 
+    <i className="fa-solid fa-bars" onClick={() => setIsOpen(true)}></i>
 
     return (
         <header>
@@ -22,5 +24,10 @@ const Header = ({isOpen, setIsOpen}) => {
         </header>
     )
 }
+
+Header.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    setIsOpen: PropTypes.func.isRequired,
+};
 
 export default Header

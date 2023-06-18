@@ -91,6 +91,8 @@ transform: rotate(90deg);
   justify-content: space-between;
   height: 100vh;
   overflow: auto;
+  padding-top: 30px;
+  border-radius: 6px
 }
 
 .home {
@@ -658,8 +660,7 @@ transform: rotate(90deg);
 }
 
 .watchlist-page {
-  height: 100%;
-  padding: 35px 30px 50vh;
+  padding: 30px 30px;
 }
 
 .invalid-watchlist {
@@ -945,6 +946,13 @@ i:hover {transform: scale(1.2);}
   }
 }
 
+.error-page {
+  padding: 200px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /***  MEDIA QUERIES***/
 
 @media (min-width: 750px) {
@@ -988,6 +996,18 @@ i:hover {transform: scale(1.2);}
     height: 25%;
   }
 
+  .search-form {
+    padding: 10px 5px 10px 20px;
+    font-size: 20px;
+  }
+
+  .search-form input { 
+    font-size: 20px;
+  }
+  
+  .search-form button {
+    font-size: 16px;
+  }
   
   .watchlist-sub-details > div { width: fit-content;}
   .signup-page, .login-page {padding: 50px 20%}

@@ -5,7 +5,8 @@ import awful from '../assets/awfulEmoji.png'
 import normal from '../assets/normalEmoji.png' 
 import great from '../assets/greatEmoji.png' 
 import ribbon from '../assets/ribbon.svg' 
-import { currentUser } from '../utils/firebase' 
+import { currentUser } from '../utils/firebase'
+import PropTypes from "prop-types";
 
 const MovieCard = ({id, name,image, year, rating, isWatchlist }) => { 
   const [isDropdownVisible, setDropdownVisible] = useState(false) 
@@ -17,6 +18,7 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
   useEffect(() => { 
     // Retrieves the watchlist items from local storage, or an empty array if there are no items.
     const watchlist = JSON.parse(localStorage.getItem('allWatchlist')) || []
+    setWatchlistItems(watchlist)
   }, [])
   
   // Show dropdow to seected watchlist to be used
@@ -145,5 +147,21 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
     </div>
   )
 }
+
+MovieCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  image: PropTypes.string,
+  year: PropTypes.string,
+  isWatchlist: PropTypes.bool,
+};
+
+MovieCard.defaultProps = {
+  name: "No Name",
+  image: "https://via.placeholder.com/300x450.png?text=No+Poster+Available",
+  year: "No Year",
+  rating: 0,
+  isWatchlist: false,
+};
 
 export default MovieCard
