@@ -16,6 +16,7 @@ const SignUp = () => {
   const [signingUp, setSigningUp] = useState(false);
   const [profilePlaceholder, setProfilePlaceholder] = useState(dummy)
   const navigate = useNavigate()
+  console.log(dummy)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +57,8 @@ const SignUp = () => {
         let profilePictureUrl = "";
         if (profilePicture) {
           profilePictureUrl = await convertBlobToDataURL(profilePicture)
+        } else {
+          profilePictureUrl = await convertBlobToDataURL(profilePlaceholder)
         }
 
         // Store profile picture URL and nickname in localStorage

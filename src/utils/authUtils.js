@@ -17,4 +17,5 @@ export async function requireAuth(request) {
     // Throw a redirect error to redirect the user to the login page with the appropriate message and redirection path
     throw redirect(redirectUrl);
   }
+  return null
 }
