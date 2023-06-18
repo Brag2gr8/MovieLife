@@ -2,7 +2,7 @@
 import { redirect } from "react-router-dom";
 import { currentUser } from "../utils/firebase";
 
-export async function requireAuth() {
+export async function requireAuth(request) {
   // Extract the pathname from the request URL
   const pathname = new URL(request.url).pathname;
 
