@@ -99,6 +99,8 @@ This project would not have been possible without the following:
 - [Scrimba Frontend Career Path](https://scrimba.com/learn/frontend) - Online course for learning frontend development
 - Fetch API - JavaScript interface for making HTTP requests
 
+
+
 Contact
 For any inquiries or questions, please contact me at brag2gr8@gmail.com.
 
