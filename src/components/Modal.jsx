@@ -129,7 +129,7 @@ const Modal = ({isOpen, setIsOpen, refresh, setRefresh }) => {
             <span>My Lists</span>
             <div className="watchlist-items">
                 {watchlistEl.length === 0 && 
-                <p className="success">Log in to view all your watchlist !</p>}
+                <p className="success">All watchlist created will appear here!</p>}
                 {watchlistEl}
             </div>
             <Profile setIsOpen={setIsOpen}/>
