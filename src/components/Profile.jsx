@@ -9,7 +9,7 @@ export default function Profile(props) {
   useEffect(() => {
     // Obtain user from local storage
     const nickname = JSON.parse(localStorage.getItem("nickname"));
-    if (user && nickname) {
+    if (user) {
       setName(nickname);
     }
   }, []);
