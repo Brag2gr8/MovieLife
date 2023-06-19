@@ -18,11 +18,12 @@ Movielife is designed to provide users with a convenient way to explore movies a
 ## Features
 
 - Browse popular movies
-- Search movies by title, genre, or actor
-- View movie details, including synopsis, ratings, and cast
+- Search movies by title.
+- View movie details, including trailers, ratings, and cast
 - Create a personal watchlist
-- Mark movies as watched
-- User authentication and account management
+- add or remove movie from watchlist
+- view all expanded movie on history
+- User authentication
 
 ## Demo
 
@@ -32,27 +33,34 @@ Include a link to a live demo or a video showcasing the functionality of your ap
 
 1. Clone the repository:
 
-`git clone https://github.com/your-username/movielife.git`
+```
+git clone https://github.com/brag2gr8/movielife.git
+```
 
 
 2. Install the dependencies:
 
 ```
-
 cd movielife
-npm install
+```
 
+```
+npm install
 ```
 
 3. Set up the environment variables:
 
-`cp .env.example .env`
+```
+cp .env.example .env
+```
 
 4. Replace the values in the `.env` file with your own API keys and configurations.
 
 5. Start the development server:
 
-`npm run dev`
+```
+npm run dev
+```
 
 
 6. Open your browser and visit `http://localhost:5173` to access the application.
@@ -90,6 +98,6 @@ This project would not have been possible without the following:
 - Fetch API - JavaScript interface for making HTTP requests
 
 Contact
-For any inquiries or questions, please contact me at your-email@example.com.
+For any inquiries or questions, please contact me at brag2gr8@gmail.com.
 
 Enjoy using MovieLife! 🎬🍿
