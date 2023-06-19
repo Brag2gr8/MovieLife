@@ -5,11 +5,6 @@ import { auth, currentUser } from "../../utils/firebase";
 // Loader function to get the "message" query parameter from the URL
 export function loader({ request }) {
   const user = currentUser()
-  console.log(user)
-  if(user) {
-    alert("you are already logged in")
-    throw new redirect("/")
-  }
   return new URL(request.url).searchParams.get("message")
 }
 
@@ -29,7 +24,7 @@ const Login = () => {
       await auth.signInWithEmailAndPassword(email, password);
       const user = auth.currentUser;
 
-      if (!user.emailVerified) {
+      if (user && !user.emailVerified) {
         setError("Verify your email before logging in");
         await auth.signOut();
         setLoading(false);

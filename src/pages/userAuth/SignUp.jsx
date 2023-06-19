@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import { auth, currentUser } from "../../utils/firebase";
+import { auth } from "../../utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
-export function loader() {
-  const user = currentUser()
-  console.log(user)
-  if(user) {
-    alert("you are already logged in")
-    throw new redirect("/")
-  }
-}
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
