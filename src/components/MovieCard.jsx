@@ -5,15 +5,12 @@ import awful from '../assets/awfulEmoji.png'
 import normal from '../assets/normalEmoji.png' 
 import great from '../assets/greatEmoji.png' 
 import ribbon from '../assets/ribbon.svg' 
-import { currentUser } from '../utils/firebase'
 import PropTypes from "prop-types";
 
 const MovieCard = ({id, name,image, year, rating, isWatchlist }) => { 
   const [isDropdownVisible, setDropdownVisible] = useState(false) 
   const [selectedWatchlist, setSelectedWatchlist] = useState('') 
   const [watchlistItems, setWatchlistItems] = useState([])
-  const navigate = useNavigate()
-  const user = currentUser()
 
   useEffect(() => { 
     // Retrieves the watchlist items from local storage, or an empty array if there are no items.
@@ -22,12 +19,7 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
   }, [])
   
   // Show dropdow to seected watchlist to be used
-  async function openWatchlistSelect() { 
-    // Conditionally checks the value of user.
-    if(!user) { 
-      navigate("/login?message=You must log in first to perform this action !") 
-      return 
-    }
+  async function openWatchlistSelect() {
 
     if (watchlistItems.length === 0) { 
       alert('Create a watchlist first to add the movie.') 

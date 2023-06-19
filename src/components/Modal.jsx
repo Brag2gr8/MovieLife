@@ -22,8 +22,8 @@ const Modal = ({isOpen, setIsOpen, refresh, setRefresh }) => {
         const existingWatchList = localStorage.getItem("allWatchlist") 
         const data = JSON.parse(existingWatchList)
 
-        // If user is logged in and there is existing data of watchlists, then set the state with the all existing watchlists.
-        if(data && user) { 
+        // If there is existing data of watchlists, then set the state with the all existing watchlists.
+        if(data) { 
             setAllWatchlist(data)
         }
         
@@ -132,7 +132,7 @@ const Modal = ({isOpen, setIsOpen, refresh, setRefresh }) => {
                 <p className="success">All watchlist created will appear here!</p>}
                 {watchlistEl}
             </div>
-            <Profile setIsOpen={setIsOpen}/>
+            <Profile setIsOpen={setIsOpen} setRefresh={setRefresh}/>
         </div>
     )
 }

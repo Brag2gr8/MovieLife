@@ -1,53 +1,60 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import dummy from "../assets/profile-dummy.png";
 import { useState, useEffect } from "react";
-import { currentUser, logout } from "../utils/firebase";
+import { currentUser, logout, firestore } from "../utils/firebase";
 
-export default function Profile(props) {
+const Profile = ({setIsOpen}) => {
   const user = currentUser();
-  const [name, setName] = useState("");
-  useEffect(() => {
-    // Obtain user from local storage
-    const nickname = JSON.parse(localStorage.getItem("nickname"));
-    if (user) {
-      setName(nickname);
-    }
-  }, []);
+  const [name, setName] = useState();
+  const navigate = useNavigate()
 
-   // Close Modal to reveal page on mobile
+  useEffect(() => {
+    const fetchNickname = async () => {
+        if (user) {
+          const userDoc = await firestore.collection("users").doc(user.uid).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            const nickname = userData.nickname;
+            setName(nickname);
+            console.log("Nickname:", nickname);
+            // You can use the nickname variable as needed
+          } 
+        }
+    };
+
+    fetchNickname();
+  }, [user]);
+
+  // Close Modal to reveal page on mobile
   function closeModal() {
-    props.setIsOpen(false)
+    setIsOpen(false);
   }
 
   // Logout the user and close the modal
   async function handleLogout() {
     await logout();
-    closeModal()
+    setName("Guest")
+    navigate("/login?message=You have successfully logged out")
+    closeModal();
   }
 
   return (
-    <div className="modal-profile" >
-      <div
-        className="guest"
-      >
+    <div className="modal-profile">
+      <div className="guest">
         <img src={dummy} alt="Profile Picture" />
         <p>{name || "Guest"}</p>
       </div>
-    {user ? (
-      <button 
-        className="little-logout-button"
-        onClick={handleLogout}
-      >
-        Log out
-      </button>
-    ) : (
-      <button 
-        className="little-logout-button"
-        onClick={closeModal}
-      >
-        <Link to="/login">Log in</Link>
-      </button>
-    )}
-  </div>
-  )
-}
+      {user ? (
+        <button className="little-logout-button" onClick={handleLogout}>
+          Log out
+        </button>
+      ) : (
+        <button className="little-logout-button" onClick={closeModal}>
+          <Link to="/login">Log in</Link>
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default Profile;

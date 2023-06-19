@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "../../utils/firebase";
+import { auth, firestore } from "../../utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -38,8 +38,8 @@ const SignUp = () => {
       // Send email verification
       await user.sendEmailVerification();
 
-        // Store nickname in localStorage
-        localStorage.setItem("nickname", JSON.stringify(nickname));
+      // Store nickname in firestore
+      await firestore.collection("users").doc(user.uid).set({ nickname });
 
       // Reset form data
       setFormData({

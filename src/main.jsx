@@ -24,13 +24,22 @@ import InvalidPage from "./pages/InvalidPage";
 import Error from "./pages/Error";
 import Login, { loader as loginLoader } from "./pages/userAuth/LogIn"
 import SignUp from "./pages/userAuth/SignUp"
-// import Dashboard from "./pages/userAuth/Dashboard"
 import { requireAuth } from './utils/authUtils';
+// import Dashboard from "./pages/userAuth/Dashboard"
 
 const movieLife = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<HomeLayout />} >
-    <Route index element={<Home />} loader={homeLoader}  errorElement={Error}/>
-    <Route path="movies" element={<Movies />} loader={moviesLoader} />
+    <Route 
+      index 
+      element={<Home />} 
+      loader={homeLoader}  
+      errorElement={Error}
+    />
+    <Route 
+      path="movies" 
+      element={<Movies />} 
+      loader={moviesLoader} 
+    />
     <Route path="movies/trending" element={<Trending />} />
     <Route path="movies/popular" element={<Popular />} />
     <Route path="movies/now-playing" element={<NowPlaying />} />
@@ -48,17 +57,9 @@ const movieLife = createBrowserRouter(createRoutesFromElements(
       loader={async ({ request }) => await requireAuth(request)}
     />
     <Route path="about" element={<About />} />
-    <Route 
-      path="create-watchList" 
-      element={<CreateWatchlist />} 
-      loader={async ({ request }) => await requireAuth(request)}
-    />
+    <Route path="create-watchList" element={<CreateWatchlist />}/>
     <Route path="edit-watchList" element={<EditWatchlist />} />
-    <Route 
-      path="watchlist/:name" 
-      element={<Watchlist />} 
-      loader={async ({ request }) => await requireAuth(request)}
-    />
+    <Route path="watchlist/:name" element={<Watchlist />} />
     <Route path="login" element={<Login />}  loader={loginLoader} />
     <Route path="signup" element={<SignUp />}/>
     <Route path="*" element={<InvalidPage />} />
