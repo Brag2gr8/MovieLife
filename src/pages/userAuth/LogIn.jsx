@@ -29,7 +29,7 @@ const Login = () => {
       await auth.signInWithEmailAndPassword(email, password);
       const user = auth.currentUser;
 
-      if (user && !user.emailVerified) {
+      if (!user.emailVerified) {
         setError("Verify your email before logging in");
         await auth.signOut();
         setLoading(false);
