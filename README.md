@@ -10,7 +10,6 @@
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgement](#acknowledgements)
-- [Contact](#contact)
 
 
 ## Introduction
