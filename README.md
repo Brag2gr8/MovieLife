@@ -9,7 +9,7 @@
 - [Technologies](#technologies)
 - [Contributing](#contributing)
 - [License](#license)
-- [Acknowledgement(#acknowledgements)
+- [Acknowledgement](#acknowledgements)
 - [Contact](#contact)
 
 
