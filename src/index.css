@@ -30,6 +30,8 @@ a {
   cursor: pointer;
 }
 
+pre {overflow: hidden;}
+
 /*** INVALID PAGE  ****/
 
 .invalid-page {
@@ -537,9 +539,11 @@ transform: rotate(90deg);
   width: 150px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   background-color: #1F1F1F;
   border-radius: 6px;
+  padding-bottom: 15px;
 }
 
 .cast-card img {
@@ -562,6 +566,7 @@ transform: rotate(90deg);
 
 .cast-card-details h4 {font-weight: 700;}
 
+.cast-card p {font-weight: 300;}
 
 .movie-trailer {
   display: flex;

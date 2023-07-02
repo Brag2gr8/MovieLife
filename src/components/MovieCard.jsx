@@ -1,4 +1,3 @@
-// Imports necessary methods and files
 import { useState, useEffect } from 'react' 
 import { Link, useNavigate } from 'react-router-dom' 
 import awful from '../assets/awfulEmoji.png' 
@@ -87,6 +86,12 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
       rating >= 75 && <img src={great} alt="Great Emoji" /> // Displayed when rating is greater than or equal to 75.
     )
 
+  // Assign default values if the string props are empty
+  const defaultName = name.trim() !== "" ? name : "No Name";
+  const defaultImage = image.trim() !== "https://image.tmdb.org/t/p/originalnull" ? 
+  image : "https://via.placeholder.com/300x450.png?text=No+Poster+Available";
+  const defaultYear = year.trim() !== "" ? year : "No Year";
+
   return (
     <div className="movie-card"> 
       {!isWatchlist && (
@@ -98,7 +103,7 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
         />
       )}
       <Link to={`/movies/all/${id}`}>
-        <img src={image} className="movie-card-image" alt="Movie" />
+        <img src={defaultImage} className="movie-card-image" alt="Movie" />
       </Link>
       <div className="movie-card-rating">
         {emoji}
@@ -107,8 +112,8 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
           <span>/100</span>
         </div>
       </div>
-      <h2>{name}</h2>
-      <p>({year})</p>
+      <h2>{defaultName}</h2>
+      <p>({defaultYear})</p>
       {isDropdownVisible && (
         <div className="watchlist-dropdown">
           <span 
@@ -145,15 +150,8 @@ MovieCard.propTypes = {
   name: PropTypes.string,
   image: PropTypes.string,
   year: PropTypes.string,
+  rating: PropTypes.number,
   isWatchlist: PropTypes.bool,
-};
-
-MovieCard.defaultProps = {
-  name: "No Name",
-  image: "https://via.placeholder.com/300x450.png?text=No+Poster+Available",
-  year: "No Year",
-  rating: 0,
-  isWatchlist: false,
 };
 
 export default MovieCard
