@@ -9,6 +9,8 @@
 - [Technologies](#technologies)
 - [Contributing](#contributing)
 - [License](#license)
+- [Acknowledgement](#acknowledgements)
+
 
 ## Introduction
 
