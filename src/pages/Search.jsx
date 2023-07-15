@@ -12,6 +12,7 @@ const Search = () => {
   const urlParam = new URLSearchParams(location.search).get("title")
   const topRef = useRef(null)
 
+  console.log(movies)
   useEffect(() => {
     // Function to load movies based on the search query and page number
     async function loadMovies() {

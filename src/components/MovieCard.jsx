@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import awful from '../assets/awfulEmoji.png' 
 import normal from '../assets/normalEmoji.png' 
 import great from '../assets/greatEmoji.png' 
-import ribbon from '../assets/ribbon.svg' 
-import PropTypes from "prop-types";
+import ribbon from '../assets/ribbon.svg'
 
 const MovieCard = ({id, name,image, year, rating, isWatchlist }) => { 
   const [isDropdownVisible, setDropdownVisible] = useState(false) 

@@ -16,7 +16,7 @@ const History = () => {
       return <MovieCard
             key={movie.id}
             id={movie.id}
-            name={movie.name}
+            name={movie.title}
             rating={movie.rating}
             image={movie.image}
             year={movie.year}
@@ -34,9 +34,6 @@ const History = () => {
             setHistory([])
         }
     }
-
-    console.log(history.length)
-
 
     return history.length === 0 ?
         (
