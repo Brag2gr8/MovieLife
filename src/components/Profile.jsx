@@ -16,8 +16,6 @@ const Profile = ({setIsOpen}) => {
             const userData = userDoc.data();
             const nickname = userData.nickname;
             setName(nickname);
-            console.log("Nickname:", nickname);
-            // You can use the nickname variable as needed
           } 
         }
     };
@@ -36,6 +34,7 @@ const Profile = ({setIsOpen}) => {
     setName("Guest")
     navigate("/login?message=You have successfully logged out")
     closeModal();
+    window.location.reload()
   }
 
   return (

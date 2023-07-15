@@ -87,10 +87,10 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
     )
 
   // Assign default values if the string props are empty
-  const defaultName = name.trim() !== "" ? name : "No Name";
-  const defaultImage = image.trim() !== "https://image.tmdb.org/t/p/originalnull" ? 
+  const defaultName = name !== "" ? name : "No Name";
+  const defaultImage = image !== "https://image.tmdb.org/t/p/originalnull" ? 
   image : "https://via.placeholder.com/300x450.png?text=No+Poster+Available";
-  const defaultYear = year.trim() !== "" ? year : "No Year";
+  const defaultYear = year !== "" ? year : "No Year";
 
   return (
     <div className="movie-card"> 
@@ -145,13 +145,13 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
   )
 }
 
-MovieCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string,
-  image: PropTypes.string,
-  year: PropTypes.string,
-  rating: PropTypes.number,
-  isWatchlist: PropTypes.bool,
-};
+// MovieCard.propTypes = {
+//   id: PropTypes.number.isRequired,
+//   name: PropTypes.string,
+//   image: PropTypes.string,
+//   year: PropTypes.string,
+//   rating: PropTypes.number,
+//   isWatchlist: PropTypes.bool,
+// };
 
 export default MovieCard

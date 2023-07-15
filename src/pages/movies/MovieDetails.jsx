@@ -35,6 +35,8 @@ const  MovieDetails = () => {
     const history = JSON.parse(localStorage.getItem("history")) || [];
     const isMovieInHistory = history.some((item) => item.id === movie.id);
 
+    console.log(movie)
+
     if (!isMovieInHistory) {
       history.unshift(movie);
       localStorage.setItem("history", JSON.stringify(history));

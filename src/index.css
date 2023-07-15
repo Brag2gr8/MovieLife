@@ -56,21 +56,6 @@ header {
   padding: 20px 17px;
 }
 
-.header-title {
-  display: flex;
-  gap: 10px
-}
-
-.beta {
-  background-color: var(--writing-color);
-  padding: 2px;
-  border-radius: 6px;
-  align-self: start;
-  font-size: 16px;
-  font-weight: 700;
-  animation: blink 2s ease-in infinite alternate;
-}
-
 header h2 {
   font-weight: 700;
   font-size: 30px;
@@ -420,9 +405,13 @@ transform: rotate(90deg);
 }
 
 .no-movie {
-  width: auto;
-  margin: 20% auto 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  min-height: 50vh;
 }
 
 .return-home {
@@ -765,6 +754,10 @@ transform: rotate(90deg);
 }
 
 /*** HISTORY ***/
+
+.history-page {
+  padding: 0 20px;
+}
 
 .history-header {
   display: flex;

@@ -9,15 +9,12 @@ const Header = ({isOpen, setIsOpen}) => {
 
     return (
         <header>
-            <div className="header-title">
-                <Link 
-                    to="/"
-                    onClick={() => setIsOpen(false)}
-                >
-                    <h2>MovieLife</h2>
-                </Link>
-                <span className="beta">beta</span>
-            </div>
+            <Link 
+                to="/"
+                onClick={() => setIsOpen(false)}
+            >
+                <h2>MovieLife</h2>
+            </Link>
             <div className="icon">
                 {icon}
             </div>
