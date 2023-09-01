@@ -389,7 +389,7 @@ transform: rotate(90deg);
 .movies-list-container > a:hover {
   background: var(--red);
   color: var(--background-color);
-  transform: scale(1.2);
+  transform: scale(1.075);
 }
 
 /***  SERACH PAGE  ***/
@@ -441,6 +441,7 @@ transform: rotate(90deg);
 
 .movie-details-page {padding: 25px; }
 .movie-details-page > h2 {margin: 100px 0 30px;}
+.movie-details-page > pre {margin-top: 20px}
 
 .movie-main-details {
   display: flex;
@@ -608,6 +609,11 @@ transform: rotate(90deg);
 
 .create-watchlist-page {
   padding: 35px 30px ;
+}
+
+.create-watchlist-page > h2 {
+  margin-bottom: 50px;
+  font-weight: 700;
 }
 
 .create-watchlist-form {

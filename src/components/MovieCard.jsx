@@ -9,6 +9,7 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false) 
   const [selectedWatchlist, setSelectedWatchlist] = useState('') 
   const [watchlistItems, setWatchlistItems] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => { 
     // Retrieves the watchlist items from local storage, or an empty array if there are no items.
@@ -21,6 +22,7 @@ const MovieCard = ({id, name,image, year, rating, isWatchlist }) => {
 
     if (watchlistItems.length === 0) { 
       alert('Create a watchlist first to add the movie.') 
+      navigate("/create-watchList")
     } else {
       setDropdownVisible(true) 
     }

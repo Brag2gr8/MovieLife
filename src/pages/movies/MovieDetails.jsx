@@ -1,10 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect, useRef } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { getMovieDetails, getTrailer, getCast, getRelatedMovies } from "../../utils/movieUtils";
 import CastCard from "../../components/CastCard";
 import MovieCard from "../../components/MovieCard";
-import { requireAuth } from "../../utils/authUtils";
 
 export async function loader({ request, params }) {
   const { id } = params;
@@ -13,9 +12,6 @@ export async function loader({ request, params }) {
   const cast = await getCast(id);
   const trailer = await getTrailer(id);
   const relatedMovies = await getRelatedMovies(id);
-
-  // check if user is logged in
-  await requireAuth(request)
 
   return { movie, cast, trailer, relatedMovies };
 }
@@ -26,6 +22,7 @@ const  MovieDetails = () => {
   const [watchlistItems, setWatchlistItems] = useState([]);
   const { movie, cast, trailer, relatedMovies } = useLoaderData();
   const topRef = useRef();
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Grab all watchlist from local storage
@@ -52,6 +49,7 @@ const  MovieDetails = () => {
  async function openWatchlistSelect() { 
     if (watchlistItems.length === 0) {
       alert("Create a watchlist first to add the movie.");
+      navigate("/create-watchList")
     } else {
       setDropdownVisible(true);
     }
@@ -200,8 +198,9 @@ const  MovieDetails = () => {
       </div>
       <h2>All Trailers</h2>
       <div className="movie-trailer">{trailerEl}</div>
-      <h2>Cast</h2>
+      <h2>All Casts</h2>
       <div className="movie-cast">{castEl}</div>
+      <pre>scroll to see more casts {">>>"}</pre>
       <h2>Related Movies</h2>
       <div className="movie-tray">{relatedMoviesEl}</div>
     </div>

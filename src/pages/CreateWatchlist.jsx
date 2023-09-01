@@ -69,6 +69,7 @@ const CreateWatchList = () => {
 
   return (
     <div className="create-watchlist-page">
+      <h2>Create A Watchlist</h2>
       <form onSubmit={handleSubmit} className="create-watchlist-form">
         <label>
           Name
